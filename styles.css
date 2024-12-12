@@ -62,16 +62,14 @@ header nav ul li a:hover::after {
 .hero {
     text-align: center;
     padding: 150px;
-    background: #f4f4f4;
-    background-image: url(assets/hero-img.jpg);
-    
-    
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(assets/hero-img.jpg);
     background-position: center;
-    background-size: 1000px;
+    background-size: cover; /* Use 'cover' to ensure full background coverage */
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 
 .hero h1 {
     font-size: 60px;
@@ -131,9 +129,61 @@ header nav ul li a:hover::after {
     color: #092412;
 }
 footer {
-    text-align: center;
-    padding: 10px 0;
     background: #091f10;
     color: white;
+    padding: 20px 10px;
+    text-align: center;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.footer-section {
+    margin: 10px;
+    flex: 1;
+    min-width: 250px;
+}
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: white;
+    border-bottom: 2px solid #ffffff50;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+.footer-section p, .footer-section ul, .footer-section ul li {
+    color: #f9f9f9;
+    margin: 5px 0;
+}
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-section ul li a:hover {
+    color: #ddd;
+}
+.social-links {
+    margin-top: 10px;
+}
+.social-links a img {
+    width: 30px;
+    margin: 0 5px;
+    transition: transform 0.3s;
+}
+.social-links a img:hover {
+    transform: scale(1.2);
+}
+.footer-bottom {
+    font-size: 14px;
+    color: #ddd;
+    border-top: 1px solid #ffffff50;
+    padding-top: 10px;
 }
