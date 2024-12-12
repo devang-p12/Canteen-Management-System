@@ -5,15 +5,20 @@ body {
     box-sizing: border-box;
 }
 header {
-    background: linear-gradient(90deg, #4CAF50, #388E3C);
+    background: linear-gradient(90deg, #092412, #388E3C);
     color: white;
     padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 .header-dev{
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+.header-dev h1{
+    font-size: 50px;
 }
 header nav ul {
     list-style-type: none;
@@ -56,37 +61,79 @@ header nav ul li a:hover::after {
 }
 .hero {
     text-align: center;
-    padding: 50px;
+    padding: 150px;
     background: #f4f4f4;
-}
-.hero-dev{
+    background-image: url(assets/hero-img.jpg);
     
-    background-image: url();
+    
+    background-position: center;
+    background-size: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
 .hero h1 {
-    font-size: 36px;
-    color: #333;
+    font-size: 60px;
+    font-weight: bolder;
+    color: white;
+
 }
 .hero p {
-    font-size: 18px;
-    color: #666;
+    font-size: 30px;
+    color: white;
 }
 .button {
-    background: #4CAF50;
+    background: #091f10;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 24px;
     transition: background 0.3s ease;
 }
 .button:hover {
     background: #45a049;
 }
+.testimonials {
+    background: #f9f9f9;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+    text-align: center;
+}
+.testimonials h2 {
+    font-size: 36px;
+    color: #092412;
+    margin-bottom: 20px;
+}
+.testimonial {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.testimonial p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+.testimonial p:first-child {
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #333;
+}
+.testimonial p:last-child {
+    font-weight: bold;
+    color: #092412;
+}
 footer {
     text-align: center;
     padding: 10px 0;
-    background: #4CAF50;
+    background: #091f10;
     color: white;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
