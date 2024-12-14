@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Now - Canteen Management System</title>
+    <title>Order Now - Canteen Management</title>
     <link rel="stylesheet" href="order-styles.css">
-    <script src="order-script.js"></script>
 </head>
 <body>
     <header>
@@ -15,54 +14,49 @@
             </div>
             <div>
                 <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="order.html">Order Now</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html">Login</a></li>
-                </ul>
-            </nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="order.html">Order Now</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </nav>
             </div>
-            
         </div>
-        
     </header>
+
     <main>
         <section class="order-section">
-    <h1>Place Your Order</h1>
-    <p>Your selected items are listed below. Complete the details to proceed.</p>
-
-    <div id="selected-items">
-        <!-- Selected items will be dynamically populated here -->
-    </div>
-
-    <form class="order-form">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-        </div>
-
-        <div class="form-group">
-            <label for="address">Delivery Address:</label>
-            <textarea id="address" name="address" rows="3" placeholder="Enter your delivery address" required></textarea>
-        </div>
-
-        <button type="submit" class="button">Submit Order</button>
-    </form>
-</section>
-
+            <h2>Order Summary</h2>
+            <p>Please review your order details below. You can make changes before proceeding to checkout.</p>
+            <table id="order-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (₹)</th>
+                        <th>Quantity</th>
+                        <th>Subtotal (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Cart items will be dynamically added here -->
+                </tbody>
+            </table>
+            <div class="total-container">
+                <div class="notes">
+                    <label for="special-notes">Special Instructions:</label>
+                    <textarea id="special-notes" placeholder="Any additional notes for your order?"></textarea>
+                </div>
+                <div class="total">
+                    <h3>Total Amount: ₹<span id="total-amount">0</span></h3>
+                </div>
+            </div>
+            <button id="checkout-button" class="button">Checkout</button>
+        </section>
     </main>
+    
+
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
@@ -79,16 +73,51 @@
             </div>
             <div class="footer-section contact">
                 <h3>Contact Us</h3>
-                <p>Email: support@canteen.com</p>
-                <p>Phone: +91 9876543210</p>
+                <p>Email: support@ezycanteen.com</p>
+                <p>Phone: +91 9999999999</p>
                 <div class="social-links">
-                    <a href="#"><img src="images/facebook-icon.png" alt="Facebook"></a>
-                    <a href="#"><img src="images/instagram-icon.png" alt="Instagram"></a>
-                    <a href="#"><img src="images/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#"><img src="assets/facebook.svg" alt="Facebook"></a>
+                    <a href="#"><img src="assets/instagram.svg" alt="Instagram"></a>
+                    <a href="#"><img src="assets/twitter.svg" alt="Twitter"></a>
                 </div>
             </div>
         </div>
-        <p class="footer-bottom">&copy; 2024 [College Name] Canteen. All rights reserved.</p>
+        <p class="footer-bottom">&copy; 2024 EzyCanteen. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Retrieve cart data from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const orderTableBody = document.querySelector('#order-table tbody');
+        const totalAmountSpan = document.getElementById('total-amount');
+
+        // Populate the table with cart data
+        let totalAmount = 0;
+        cart.forEach(item => {
+            const row = document.createElement('tr');
+            const subtotal = item.price * item.quantity;
+
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>₹${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>₹${subtotal}</td>
+            `;
+
+            orderTableBody.appendChild(row);
+            totalAmount += subtotal;
+        });
+
+        // Update total amount
+        totalAmountSpan.textContent = totalAmount.toFixed(2);
+
+        // Handle checkout button
+        document.getElementById('checkout-button').addEventListener('click', () => {
+            alert('Order placed successfully!');
+            // Clear the cart and redirect (optional)
+            localStorage.removeItem('cart');
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>

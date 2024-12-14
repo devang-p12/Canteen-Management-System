@@ -15,18 +15,16 @@
             </div>
             <div>
                 <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="order.html">Order Now</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html">Login</a></li>
-                </ul>
-            </nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="order.html">Order Now</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </nav>
             </div>
-            
         </div>
-        
     </header>
 
     <main>
@@ -43,64 +41,80 @@
                     <img src="assets/Idli-Sambhar.jpg" alt="Idli-Sambar" class="food-img">
                     <h3>Idli-Sambar</h3>
                     <p>₹30</p>
-                    <label for="quantity-idli-sambar">Quantity:</label>
-                    <input type="number" id="quantity-idli-sambar" class="quantity" data-name="Idli-Sambar" data-price="30" value="1" min="1">
-                    <button class="add-to-cart" data-name="Idli-Sambar" data-price="30">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-idli-sambar">Quantity:</label>
+                        <input type="number" id="quantity-idli-sambar" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Idli-Sambar" data-price="30">Add to Cart</button>
+                    </div>
+                    
                 </div>
 
                 <div class="menu-item">
-                    <img src="assets/Poori-Bhaji.jpg" alt="Poori-Bhaji"class="food-img">
+                    <img src="assets/Poori-Bhaji.jpg" alt="Poori-Bhaji" class="food-img">
                     <h3>Poori-Bhaji</h3>
                     <p>₹40</p>
-                    <label for="quantity-poori-bhaji">Quantity:</label>
-                    <input type="number" id="quantity-poori-bhaji" class="quantity" data-name="Poori-Bhaji" data-price="40" value="1" min="1">
-                    <button class="add-to-cart" data-name="Poori-Bhaji" data-price="40">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-poori-bhaji">Quantity:</label>
+                        <input type="number" id="quantity-poori-bhaji" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Poori-Bhaji" data-price="40">Add to Cart</button>
+
+                    </div>
                 </div>
 
                 <div class="menu-item">
                     <img src="assets/Masala-Dosa.jpg" alt="Masala Dosa" class="food-img">
                     <h3>Masala Dosa</h3>
                     <p>₹50</p>
-                    <label for="quantity-masala-dosa">Quantity:</label>
-                    <input type="number" id="quantity-masala-dosa" class="quantity" data-name="Masala Dosa" data-price="50" value="1" min="1">
-                    <button class="add-to-cart" data-name="Masala Dosa" data-price="50">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-masala-dosa">Quantity:</label>
+                        <input type="number" id="quantity-masala-dosa" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Masala Dosa" data-price="50">Add to Cart</button>
+                    </div>
+                    
                 </div>
             </div>
 
-            <!-- Lunch Category -->
             <div class="menu-category">
                 <h2>Lunch</h2>
             </div>
             <div class="menu-items">
                 <div class="menu-item">
-                    <img src="assets/Veg-Thaali.jpg" alt="Veg Thali" class="food-img">
-                    <h3>Veg Thali</h3>
+                    <img src="assets/Veg-Thaali.jpg" alt="Veg-Thaali" class="food-img">
+                    <h3>Veg-Thaali</h3>
                     <p>₹70</p>
-                    <label for="quantity-veg-thali">Quantity:</label>
-                    <input type="number" id="quantity-veg-thali" class="quantity" data-name="Veg Thali" data-price="70" value="1" min="1">
-                    <button class="add-to-cart" data-name="Veg Thali" data-price="70">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-veg-thaali">Quantity:</label>
+                        <input type="number" id="quantity-veg-thaali" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="veg-thaali" data-price="30">Add to Cart</button>
+                    </div>
+                    
                 </div>
 
                 <div class="menu-item">
-                    <img src="assets/chicken-biryani.jpg" alt="Chicken Biryani" class="food-img">
+                    <img src="assets/chicken-biryani.jpg" alt="chicken-biryani" class="food-img">
                     <h3>Chicken Biryani</h3>
                     <p>₹120</p>
-                    <label for="quantity-chicken-biryani">Quantity:</label>
-                    <input type="number" id="quantity-chicken-biryani" class="quantity" data-name="Chicken Biryani" data-price="120" value="1" min="1">
-                    <button class="add-to-cart" data-name="Chicken Biryani" data-price="120">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-chicken-biryani">Quantity:</label>
+                        <input type="number" id="quantity-poori-bhaji" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Chicken Biryani" data-price="120">Add to Cart</button>
+
+                    </div>
                 </div>
 
                 <div class="menu-item">
                     <img src="assets/Pasta.jpg" alt="Pasta" class="food-img">
                     <h3>Pasta</h3>
                     <p>₹80</p>
-                    <label for="quantity-pasta">Quantity:</label>
-                    <input type="number" id="quantity-pasta" class="quantity" data-name="Pasta" data-price="80" value="1" min="1">
-                    <button class="add-to-cart" data-name="Pasta" data-price="80">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-pasta">Quantity:</label>
+                        <input type="number" id="quantity-pasta" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Pasta" data-price="80">Add to Cart</button>
+                    </div>
+                    
                 </div>
             </div>
 
-            <!-- Beverages Category -->
             <div class="menu-category">
                 <h2>Beverages</h2>
             </div>
@@ -109,64 +123,90 @@
                     <img src="assets/Tea.jpg" alt="Tea" class="food-img">
                     <h3>Tea</h3>
                     <p>₹10</p>
-                    <label for="quantity-tea">Quantity:</label>
-                    <input type="number" id="quantity-tea" class="quantity" data-name="Tea" data-price="10" value="1" min="1">
-                    <button class="add-to-cart" data-name="Tea" data-price="10">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-tea">Quantity:</label>
+                        <input type="number" id="quantity-tea" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Tea" data-price="10">Add to Cart</button>
+                    </div>
+                    
                 </div>
 
                 <div class="menu-item">
-                    <img src="assets/coffee.jpg" alt="Coffee" class="food-img">
+                    <img src="assets/coffee.jpg" alt="coffee" class="food-img">
                     <h3>Coffee</h3>
                     <p>₹20</p>
-                    <label for="quantity-coffee">Quantity:</label>
-                    <input type="number" id="quantity-coffee" class="quantity" data-name="Coffee" data-price="20" value="1" min="1">
-                    <button class="add-to-cart" data-name="Coffee" data-price="20">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-coffee">Quantity:</label>
+                        <input type="number" id="quantity-coffee" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Coffee" data-price="20">Add to Cart</button>
+
+                    </div>
                 </div>
 
                 <div class="menu-item">
-                    <img src="assets/fresh-juice.jpg" alt="Fresh Juice" class="food-img">
+                    <img src="assets/fresh-juice.jpg" alt="fresh-juice" class="food-img">
                     <h3>Fresh Juice</h3>
                     <p>₹30</p>
-                    <label for="quantity-fresh-juice">Quantity:</label>
-                    <input type="number" id="quantity-fresh-juice" class="quantity" data-name="Fresh Juice" data-price="30" value="1" min="1">
-                    <button class="add-to-cart" data-name="Fresh Juice" data-price="30">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-fresh-juice">Quantity:</label>
+                        <input type="number" id="quantity-fresh-juice" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Fresh-Juice" data-price="30">Add to Cart</button>
+                    </div>
+                    
                 </div>
             </div>
 
-            <!-- Snacks Category -->
             <div class="menu-category">
                 <h2>Snacks</h2>
             </div>
             <div class="menu-items">
                 <div class="menu-item">
-                    <img src="assets/burger.jpg" alt="Burger" class="food-img">
+                    <img src="assets/burger.jpg" alt="burger" class="food-img">
                     <h3>Burger</h3>
                     <p>₹25</p>
-                    <label for="quantity-burger">Quantity:</label>
-                    <input type="number" id="quantity-burger" class="quantity" data-name="Burger" data-price="25" value="1" min="1">
-                    <button class="add-to-cart" data-name="Burger" data-price="25">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-burger">Quantity:</label>
+                        <input type="number" id="quantity-burger" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Burger" data-price="25">Add to Cart</button>
+                    </div>
+                    
                 </div>
 
                 <div class="menu-item">
-                    <img src="assets/samosa.jpg" alt="Samosa" class="food-img">
+                    <img src="assets/samosa.jpg" alt="samosa" class="food-img">
                     <h3>Samosa</h3>
                     <p>₹20</p>
-                    <label for="quantity-samosa">Quantity:</label>
-                    <input type="number" id="quantity-samosa" class="quantity" data-name="Samosa" data-price="20" value="1" min="1">
-                    <button class="add-to-cart" data-name="Samosa" data-price="20">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-samosa">Quantity:</label>
+                        <input type="number" id="quantity-samosa" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="Samosa" data-price="20">Add to Cart</button>
+
+                    </div>
                 </div>
 
                 <div class="menu-item">
-                    <img src="assets/french-fries.jpg" alt="French Fries" class="food-img">
+                    <img src="assets/french-fries.jpg" alt="french-fries" class="food-img">
                     <h3>French Fries</h3>
                     <p>₹50</p>
-                    <label for="quantity-french-fries">Quantity:</label>
-                    <input type="number" id="quantity-french-fries" class="quantity" data-name="French Fries" data-price="50" value="1" min="1">
-                    <button class="add-to-cart" data-name="French Fries" data-price="50">Add to Cart</button>
+                    <div class="quantity-container">
+                        <label for="quantity-french-fries">Quantity:</label>
+                        <input type="number" id="quantity-french-fries" class="quantity" value="1" min="1">
+                        <button class="add-to-cart" data-name="French-Fries" data-price="50">Add to Cart</button>
+                    </div>
+                    
                 </div>
             </div>
+            <!-- Other categories will follow the same pattern as above -->
 
-            <button id="proceed-to-order" class="button">Proceed to Order</button>
+            <!-- Cart Section -->
+            <div class="cart-section">
+                <h2>Your Cart</h2>
+                <ul id="cart-list">
+                    <!-- Cart items will be dynamically added here -->
+                </ul>
+                <button id="proceed-to-order" class="button">Proceed to Order</button>
+            </div>
+
         </section>
     </main>
 
@@ -197,9 +237,38 @@
         </div>
         <p class="footer-bottom">&copy; 2024 EzyCanteen. All rights reserved.</p>
     </footer>
-
     <script>
-        // JavaScript code for cart functionality
-    </script>
+        
+        let cart = [];
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', (event) => {
+                let itemName = event.target.getAttribute('data-name');
+                let itemPrice = parseInt(event.target.getAttribute('data-price'));
+                let itemQuantity = parseInt(event.target.previousElementSibling.value);
+        
+                let item = { name: itemName, price: itemPrice, quantity: itemQuantity };
+                cart.push(item);
+                updateCartDisplay();
+            });
+        });
+        
+        
+        function updateCartDisplay() {
+            let cartList = document.getElementById('cart-list');
+            cartList.innerHTML = '';
+            cart.forEach(item => {
+                let cartItem = document.createElement('li');
+                cartItem.textContent = `${item.name} - ₹${item.price} x ${item.quantity}`;
+                cartList.appendChild(cartItem);
+            });
+        }
+        
+        
+        document.getElementById('proceed-to-order').addEventListener('click', () => {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'order.html'; 
+        });
+        </script>
+
 </body>
 </html>
