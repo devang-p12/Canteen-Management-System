@@ -321,3 +321,142 @@ footer {
     border-top: 1px solid #ffffff50;
     padding-top: 10px;
 }
+
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 768px) {
+    /* Header */
+    header {
+        padding: 15px;
+    }
+    .header-dev {
+        flex-direction: column;
+        text-align: center;
+    }
+    .header-dev h1 {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Main Content */
+    main {
+        padding: 10px;
+    }
+
+    /* Order Section */
+    .order-section {
+        padding: 15px;
+        margin: 10px auto;
+    }
+    .order-section h2 {
+        font-size: 24px;
+    }
+    .order-section p {
+        font-size: 14px;
+    }
+
+    /* Order Table */
+    #order-table {
+        font-size: 12px;
+    }
+    #order-table th, #order-table td {
+        padding: 8px 5px;
+    }
+    .total-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .notes {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .total {
+        width: 100%;
+        text-align: left;
+    }
+
+    /* Checkout Button */
+    #checkout-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Form Group */
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Footer */
+    footer {
+        padding: 10px 5px;
+    }
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-section {
+        margin: 10px 0;
+    }
+    .social-links a img {
+        width: 25px;
+    }
+}
+
+/* Small Devices (up to 480px) */
+@media (max-width: 480px) {
+    /* Header */
+    .header-dev h1 {
+        font-size: 24px;
+    }
+    header nav ul li a {
+        font-size: 14px;
+    }
+
+    /* Order Section */
+    .order-section {
+        padding: 10px;
+    }
+    .order-section h2 {
+        font-size: 20px;
+    }
+
+    /* Buttons */
+    .button,
+    #checkout-button {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    /* Table Adjustments */
+    #order-table th, #order-table td {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    /* Notes and Total */
+    .notes label {
+        font-size: 12px;
+    }
+    #special-notes {
+        height: 60px;
+    }
+    .total h3 {
+        font-size: 16px;
+    }
+
+    /* Footer */
+    .footer-section h3 {
+        font-size: 18px;
+    }
+    .footer-bottom {
+        font-size: 12px;
+    }
+}
+
