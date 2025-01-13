@@ -5,19 +5,19 @@ body {
     box-sizing: border-box;
 }
 header {
-    background: linear-gradient(90deg, #092412, #388E3C);
+    background: linear-gradient(90deg, #092412, #0dcaf0);
     color: white;
     padding: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
-.header-dev{
+.headerdev{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.header-dev h1{
+.headerdev h1{
     font-size: 50px;
 }
 header nav ul {
@@ -41,8 +41,8 @@ header nav ul li a {
     transition: background 0.3s ease, color 0.3s ease;
 }
 header nav ul li a:hover {
-    background: white;
-    color: #4CAF50;
+    background: #0dcaf0;
+    color: lightblue;
     font-weight: bold;
 }
 header nav ul li a::after {
@@ -91,9 +91,9 @@ header nav ul li a:hover::after {
     transition: background 0.3s ease;
 }
 .button:hover {
-    background: #45a049;
+    background: #0dcaf0;
 }
-.testimonials {
+.review {
     background: #f9f9f9;
     padding: 40px 20px;
     border-radius: 10px;
@@ -101,12 +101,12 @@ header nav ul li a:hover::after {
     margin: 30px;
     text-align: center;
 }
-.testimonials h2 {
+.review h2 {
     font-size: 36px;
     color: #092412;
     margin-bottom: 20px;
 }
-.testimonial {
+.review {
     background: white;
     padding: 20px;
     margin: 20px auto;
@@ -114,17 +114,17 @@ header nav ul li a:hover::after {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.testimonial p {
+.review p {
     font-size: 16px;
     color: #555;
     line-height: 1.5;
 }
-.testimonial p:first-child {
+.review p:first-child {
     font-style: italic;
     margin-bottom: 10px;
     color: #333;
 }
-.testimonial p:last-child {
+.review p:last-child {
     font-weight: bold;
     color: #092412;
 }
@@ -135,18 +135,18 @@ footer {
     text-align: center;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
-.footer-content {
+.fc {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
-.footer-section {
+.fs {
     margin: 10px;
     flex: 1;
     min-width: 250px;
 }
-.footer-section h3 {
+.fs h3 {
     margin-bottom: 10px;
     font-size: 20px;
     color: white;
@@ -154,34 +154,34 @@ footer {
     display: inline-block;
     padding-bottom: 5px;
 }
-.footer-section p, .footer-section ul, .footer-section ul li {
+.fs p, .fs ul, .fs ul li {
     color: #f9f9f9;
     margin: 5px 0;
 }
-.footer-section ul {
+.fs ul {
     list-style-type: none;
     padding: 0;
 }
-.footer-section ul li a {
+.fs ul li a {
     color: white;
     text-decoration: none;
     transition: color 0.3s;
 }
-.footer-section ul li a:hover {
+.fs ul li a:hover {
     color: #ddd;
 }
-.social-links {
+.sl {
     margin-top: 10px;
 }
-.social-links a img {
+.sl a img {
     width: 30px;
     margin: 0 5px;
     transition: transform 0.3s;
 }
-.social-links a img:hover {
+.sl a img:hover {
     transform: scale(1.2);
 }
-.footer-bottom {
+.fb {
     font-size: 14px;
     color: #ddd;
     border-top: 1px solid #ffffff50;
@@ -194,11 +194,11 @@ footer {
         gap: 10px;
         text-align: center;
     }
-    .header-dev {
+    .headerdev {
         flex-direction: column;
         text-align: center;
     }
-    .header-dev h1 {
+    .headerdev h1 {
         font-size: 28px;
     }
     .hero {
@@ -210,17 +210,17 @@ footer {
     .hero p {
         font-size: 16px;
     }
-    .testimonials {
+    .reviews {
         margin: 10px;
         padding: 15px;
     }
     footer {
         padding: 10px;
     }
-    .footer-content {
+    .fs {
         flex-direction: column;
     }
-    .footer-section {
+    .fs {
         text-align: center;
         margin-bottom: 10px;
     }
@@ -230,7 +230,7 @@ footer {
     header {
         padding: 20px 10px;
     }
-    .header-dev h1 {
+    .headerdev h1 {
         font-size: 24px;
     }
     header nav ul li a {
@@ -249,19 +249,19 @@ footer {
         font-size: 16px;
         padding: 8px 16px;
     }
-    .testimonials h2 {
+    .review h2 {
         font-size: 22px;
     }
-    .testimonial p {
+    .review p {
         font-size: 14px;
     }
-    .footer-section h3 {
+    .fs h3 {
         font-size: 16px;
     }
-    .footer-section p {
+    .fs p {
         font-size: 12px;
     }
-    .social-links a img {
+    .sl a img {
         width: 20px;
     }
 }
