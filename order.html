@@ -27,10 +27,10 @@
     </header>
 
     <main>
-        <section class="order-section">
+        <section class="os">
             <h2>Order Summary</h2>
             <p>Please review your order details below. You can make changes before proceeding to checkout.</p>
-            <table id="order-table">
+            <table id="ot">
                 <thead>
                     <tr>
                         <th>Item</th>
@@ -43,27 +43,27 @@
                     <!-- Cart items will be dynamically added here -->
                 </tbody>
             </table>
-            <div class="total-container">
+            <div class="tc">
                 <div class="notes">
-                    <label for="special-notes">Special Instructions:</label>
-                    <textarea id="special-notes" placeholder="Any additional notes for your order?"></textarea>
+                    <label for="sn">Special Instructions:</label>
+                    <textarea id="sn" placeholder="Any additional notes for your order?"></textarea>
                 </div>
                 <div class="total">
-                    <h3>Total Amount: ₹<span id="total-amount">0</span></h3>
+                    <h3>Total Amount: ₹<span id="ta">0</span></h3>
                 </div>
             </div>
-            <button id="checkout-button" class="button">Checkout</button>
+            <button id="cb" class="button">Checkout</button>
         </section>
     </main>
     
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section about">
+        <div class="fc">
+            <div class="fsa">
                 <h3>About Us</h3>
                 <p>We aim to provide delicious and hygienic food to all students and staff at VIT. Our focus is on quality, affordability, and quick service.</p>
             </div>
-            <div class="footer-section links">
+            <div class="fsl">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="menu.html">Our Menu</a></li>
@@ -71,25 +71,25 @@
                     <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
-            <div class="footer-section contact">
+            <div class="fsc">
                 <h3>Contact Us</h3>
                 <p>Email: support@vitcanteen.com</p>
                 <p>Phone: +91 9999999999</p>
-                <div class="social-links">
+                <div class="sl">
                     <a href="#"><img src="assets/facebook.svg" alt="Facebook"></a>
                     <a href="#"><img src="assets/instagram.svg" alt="Instagram"></a>
                     <a href="#"><img src="assets/twitter.svg" alt="Twitter"></a>
                 </div>
             </div>
         </div>
-        <p class="footer-bottom">&copy; 2024 VIT Canteen. All rights reserved.</p>
+        <p class="fb">&copy; 2024 VIT Canteen. All rights reserved.</p>
     </footer>
 
     <script>
         // Retrieve cart data from localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const orderTableBody = document.querySelector('#order-table tbody');
-        const totalAmountSpan = document.getElementById('total-amount');
+        const orderTableBody = document.querySelector('#ot tbody');
+        const totalAmountSpan = document.getElementById('ta');
 
         // Populate the table with cart data
         let totalAmount = 0;
@@ -112,7 +112,7 @@
         totalAmountSpan.textContent = totalAmount.toFixed(2);
 
         // Handle checkout button
-        document.getElementById('checkout-button').addEventListener('click', () => {
+        document.getElementById('cb').addEventListener('click', () => {
             alert('Order placed successfully!');
             // Clear the cart and redirect (optional)
             localStorage.removeItem('cart');

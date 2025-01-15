@@ -77,7 +77,7 @@ body {
 }
 
 
-.menu-section {
+.ms {
     padding: 50px 10%;
     text-align: center;
     background-color: #fff;
@@ -87,19 +87,19 @@ body {
     max-width: 1200px;
 }
 
-.menu-section h1 {
+.ms h1 {
     font-size: 36px;
     color: #4CAF50;
     margin-bottom: 10px;
 }
 
-.menu-section p {
+.ms p {
     font-size: 18px;
     margin-bottom: 30px;
     color: #777;
 }
 
-.cart-button {
+.cb {
     background: #091f10;
     color: white;
     padding: 10px 20px;
@@ -108,21 +108,22 @@ body {
     font-size: 24px;
     transition: background 0.3s ease;
 }
-.cart-button:hover {
+.cb:hover {
     background: #45a049;
 }
 
 /* Menu category styles */
 /* General Styles for the Menu Section */
-.menu-items {
+.mis {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 20px;
+    margin: 20px;
 }
 
 
-.menu-item {
+.mi {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -131,11 +132,11 @@ body {
     transition: transform 0.3s ease;
 }
 
-.menu-item:hover {
+.mi:hover {
     transform: translateY(-5px);
 }
 
-.menu-category{
+.mc{
     margin: 40px;
 }
 
@@ -147,13 +148,13 @@ body {
     
 
 /* Responsive Design */
-.food-img{
+.fi{
     height: 150px;
     border-radius: 10px;
 }
 
 /* Cart Section Styling */
-.cart-section {
+.cs {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
@@ -163,7 +164,7 @@ body {
     margin: 40px auto;
 }
 
-.cart-section h2 {
+.cs h2 {
     font-size: 2rem;
     font-weight: 600;
     color: #333;
@@ -171,13 +172,13 @@ body {
     margin-bottom: 20px;
 }
 
-#cart-list {
+#cart-l {
     list-style: none;
     padding: 0;
     margin-bottom: 20px;
 }
 
-#cart-list li {
+#cart-l li {
     background-color: #fff;
     padding: 15px;
     border: 1px solid #ddd;
@@ -189,27 +190,27 @@ body {
     transition: transform 0.3s ease;
 }
 
-#cart-list li:hover {
+#cart-l li:hover {
     transform: translateY(-5px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#cart-list li span {
+#cart-l li span {
     font-size: 1.1rem;
     color: #555;
 }
 
-#cart-list li span:first-child {
+#cart-l li span:first-child {
     font-weight: bold;
 }
 
-#cart-list li span:last-child {
+#cart-l li span:last-child {
     font-size: 1rem;
     color: #888;
 }
 
-/* Container for the quantity and add-to-cart button */
-.quantity-container {
+/* Container for the quantity and atc  button */
+.qc {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -220,7 +221,7 @@ body {
 }
 
 /* Label for the quantity input */
-.quantity-container label {
+.qc label {
     font-size: 1rem;
     font-weight: bold;
     color: #333;
@@ -228,7 +229,7 @@ body {
 }
 
 /* Style for the quantity input */
-.quantity-container .quantity {
+.qc .quantity {
     width: 60px;
     height: 40px;
     font-size: 1.2rem;
@@ -240,13 +241,13 @@ body {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.quantity-container .quantity:focus {
+.qc .quantity:focus {
     border-color: #ff8c00;
     box-shadow: 0 0 5px rgba(255, 140, 0, 0.7);
 }
 
 /* Add to Cart Button */
-.add-to-cart {
+.atc {
     background-color: #ff8c00;
     color: white;
     font-size: 1rem;
@@ -260,39 +261,39 @@ body {
     width: auto;
 }
 
-.add-to-cart:hover {
+.atc :hover {
     background-color: #ff6a00;
     transform: translateY(-3px);
 }
 
-.add-to-cart:active {
+.atc :active {
     transform: scale(0.98);
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
-    .quantity-container {
+    .qc {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .quantity-container label {
+    .qc label {
         margin-bottom: 5px;
     }
 
-    .quantity-container .quantity {
+    .qc .quantity {
         width: 100%;
         margin-bottom: 10px;
     }
 
-    .add-to-cart {
+    .atc  {
         width: 100%;
     }
 }
 
 
 /* Button Styling */
-#proceed-to-order {
+#pto  {
     background-color: #4CAF50;
     color: white;
     font-size: 1.2rem;
@@ -304,79 +305,91 @@ body {
     transition: background-color 0.3s ease;
 }
 
-#proceed-to-order:hover {
+#pto :hover {
     background-color: #45a049;
 }
 
-#proceed-to-order:active {
+#pto :active {
     transform: scale(0.98);
 }
 
 
-
 footer {
-    background: #091f10;
-    color: white;
-    padding: 20px 10px;
+    background: #333;
+    color: #fff;
     text-align: center;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+footer {
+background: #091f10;
+color: white;
+padding: 20px 10px;
+text-align: center;
+box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 .footer-content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+margin-bottom: 20px;
 }
 .footer-section {
-    margin: 10px;
-    flex: 1;
-    min-width: 250px;
+margin: 10px;
+flex: 1;
+min-width: 250px;
 }
 .footer-section h3 {
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: white;
-    border-bottom: 2px solid #ffffff50;
-    display: inline-block;
-    padding-bottom: 5px;
+margin-bottom: 10px;
+font-size: 20px;
+color: white;
+border-bottom: 2px solid #ffffff50;
+display: inline-block;
+padding-bottom: 5px;
 }
 .footer-section p, .footer-section ul, .footer-section ul li {
-    color: #f9f9f9;
-    margin: 5px 0;
+color: #f9f9f9;
+margin: 5px 0;
 }
 .footer-section ul {
-    list-style-type: none;
-    padding: 0;
+list-style-type: none;
+padding: 0;
 }
 .footer-section ul li a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
+color: white;
+text-decoration: none;
+transition: color 0.3s;
 }
 .footer-section ul li a:hover {
-    color: #ddd;
+color: #ddd;
 }
 .social-links {
-    margin-top: 10px;
+margin-top: 10px;
 }
 .social-links a img {
-    width: 30px;
-    margin: 0 5px;
-    transition: transform 0.3s;
+width: 30px;
+margin: 0 5px;
+transition: transform 0.3s;
 }
 .social-links a img:hover {
-    transform: scale(1.2);
+transform: scale(1.2);
 }
 .footer-bottom {
-    font-size: 14px;
-    color: #ddd;
-    border-top: 1px solid #ffffff50;
-    padding-top: 10px;
+font-size: 14px;
+color: #ddd;
+border-top: 1px solid #ffffff50;
+padding-top: 10px;
 }
+
+
 
 @media (max-width: 1024px) {
     /* Reduce menu to two columns for tablets */
-    .menu-items {
+    .mi {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -396,11 +409,11 @@ footer {
 
 @media (max-width: 768px) {
     /* Single column menu for smaller devices */
-    .menu-items {
+    .mi {
         grid-template-columns: 1fr;
     }
 
-    .menu-section {
+    .ms {
         padding: 20px;
     }
 
@@ -430,11 +443,11 @@ footer {
         font-size: 24px;
     }
 
-    .menu-item {
+    .mi {
         padding: 15px;
     }
 
-    .cart-section {
+    .cs {
         padding: 10px;
     }
 

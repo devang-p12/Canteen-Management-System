@@ -72,7 +72,7 @@ main {
     background: #f4f4f4;
 }
 /* General Layout for Order Section */
-.order-section {
+.os {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
@@ -80,17 +80,18 @@ main {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     font-family: 'Arial', sans-serif;
+    
 }
 
 /* Section Heading and Description */
-.order-section h2 {
+.os h2 {
     text-align: center;
     font-size: 28px;
     color: #333;
     margin-bottom: 10px;
 }
 
-.order-section p {
+.os p {
     text-align: center;
     font-size: 16px;
     color: #666;
@@ -98,36 +99,36 @@ main {
 }
 
 /* Order Table */
-#order-table {
+#ot {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-#order-table th,
-#order-table td {
+#ot th,
+#ot td {
     text-align: center;
     padding: 12px 8px;
     border: 1px solid #ddd;
 }
 
-#order-table th {
+#ot th {
     background-color: #333;
     color: #fff;
     font-size: 16px;
 }
 
-#order-table td {
+#ot td {
     font-size: 15px;
     color: #555;
 }
 
-#order-table tbody tr:hover {
+#ot tbody tr:hover {
     background-color: #f1f1f1;
 }
 
 /* Total Section */
-.total-container {
+.tc {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -145,7 +146,7 @@ main {
     display: block;
 }
 
-#special-notes {
+#sn {
     width: 100%;
     height: 80px;
     padding: 10px;
@@ -156,7 +157,7 @@ main {
     background-color: #fff;
 }
 
-#special-notes:focus {
+#sn:focus {
     border-color: #007bff;
     outline: none;
 }
@@ -173,7 +174,7 @@ main {
 }
 
 /* Checkout Button */
-#checkout-button {
+#cb {
     display: block;
     width: 100%;
     padding: 12px;
@@ -189,16 +190,16 @@ main {
     transition: background-color 0.3s ease;
 }
 
-#checkout-button:hover {
+#cb :hover {
     background-color: #0056b3;
 }
 
-#checkout-button:active {
+#cb :active {
     transform: scale(0.98);
 }
 
 
-.order-section {
+.os {
     background: white;
     padding: 20px;
     margin: 20px auto;
@@ -207,12 +208,12 @@ main {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.order-section h1 {
+.os h1 {
     text-align: center;
     color: #4CAF50;
 }
 
-.order-section p {
+.os p {
     text-align: center;
     color: #555;
     margin-bottom: 20px;
@@ -269,18 +270,18 @@ footer {
     text-align: center;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
-.footer-content {
+.fc {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
-.footer-section {
+.fs {
     margin: 10px;
     flex: 1;
     min-width: 250px;
 }
-.footer-section h3 {
+.fs h3 {
     margin-bottom: 10px;
     font-size: 20px;
     color: white;
@@ -288,34 +289,34 @@ footer {
     display: inline-block;
     padding-bottom: 5px;
 }
-.footer-section p, .footer-section ul, .footer-section ul li {
+.fs p, .fs ul, .fs ul li {
     color: #f9f9f9;
     margin: 5px 0;
 }
-.footer-section ul {
+.fs ul {
     list-style-type: none;
     padding: 0;
 }
-.footer-section ul li a {
+.fs ul li a {
     color: white;
     text-decoration: none;
     transition: color 0.3s;
 }
-.footer-section ul li a:hover {
+.fs ul li a:hover {
     color: #ddd;
 }
-.social-links {
+.sl {
     margin-top: 10px;
 }
-.social-links a img {
+.sl a img {
     width: 30px;
     margin: 0 5px;
     transition: transform 0.3s;
 }
-.social-links a img:hover {
+.sl a img:hover {
     transform: scale(1.2);
 }
-.footer-bottom {
+.fb {
     font-size: 14px;
     color: #ddd;
     border-top: 1px solid #ffffff50;
@@ -348,25 +349,25 @@ footer {
     }
 
     /* Order Section */
-    .order-section {
+    .os {
         padding: 15px;
         margin: 10px auto;
     }
-    .order-section h2 {
+    .os h2 {
         font-size: 24px;
     }
-    .order-section p {
+    .os p {
         font-size: 14px;
     }
 
     /* Order Table */
-    #order-table {
+    #ot {
         font-size: 12px;
     }
-    #order-table th, #order-table td {
+    #ot th, #ot td {
         padding: 8px 5px;
     }
-    .total-container {
+    .tc {
         flex-direction: column;
         align-items: stretch;
     }
@@ -380,7 +381,7 @@ footer {
     }
 
     /* Checkout Button */
-    #checkout-button {
+    #cb  {
         font-size: 14px;
         padding: 10px;
     }
@@ -397,14 +398,14 @@ footer {
     footer {
         padding: 10px 5px;
     }
-    .footer-content {
+    .fc {
         flex-direction: column;
         text-align: center;
     }
-    .footer-section {
+    .fs {
         margin: 10px 0;
     }
-    .social-links a img {
+    .sl a img {
         width: 25px;
     }
 }
@@ -420,22 +421,22 @@ footer {
     }
 
     /* Order Section */
-    .order-section {
+    .os {
         padding: 10px;
     }
-    .order-section h2 {
+    .os h2 {
         font-size: 20px;
     }
 
     /* Buttons */
     .button,
-    #checkout-button {
+    #cb  {
         font-size: 12px;
         padding: 8px;
     }
 
     /* Table Adjustments */
-    #order-table th, #order-table td {
+    #ot th, #ot td {
         font-size: 10px;
         padding: 5px;
     }
@@ -444,7 +445,7 @@ footer {
     .notes label {
         font-size: 12px;
     }
-    #special-notes {
+    #sn {
         height: 60px;
     }
     .total h3 {
@@ -452,10 +453,10 @@ footer {
     }
 
     /* Footer */
-    .footer-section h3 {
+    .fs h3 {
         font-size: 18px;
     }
-    .footer-bottom {
+    .fb {
         font-size: 12px;
     }
 }
