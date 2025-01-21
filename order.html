@@ -8,23 +8,70 @@
 </head>
 <body>
     <header>
-        <div class="header-dev">
+        <div class="headerdev">
             <div>
                 <h1>VIT Canteen</h1>
             </div>
             <div>
                 <nav>
-                    <ul>
+                    <ul id="nav-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="menu.html">Menu</a></li>
                         <li><a href="order.html">Order Now</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="login.html">Login</a></li>
+                        <li id="auth-link"><a href="login.html">Login</a></li>
                     </ul>
                 </nav>
-            </div>
-        </div>
+            </div>  
+        </div>  
     </header>
+
+    <script>
+        // Example user data (replace with actual data from backend if needed)
+        const user = { name: "John Doe", email: "john.doe@example.com" };
+    
+        // Check if logged in (sessionStorage example)
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            const authLink = document.getElementById('auth-link');
+            
+            // Replace login link with profile dropdown
+            authLink.innerHTML = `
+                <div class="dropdown">
+                    <span class="profile-icon" onclick="toggleDropdown()">${user.name}</span> <!-- Profile Name -->
+                    <div class="dropdown-content" id="dropdown-content">
+                        <p><strong>${user.name}</strong></p> <!-- User Name -->
+                        <p>${user.email}</p> <!-- User Email -->
+                        <hr />
+                        <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
+                    </div>
+                </div>`;
+        }
+    
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdown-content');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+    
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('loggedIn'); // Clear login status
+            window.location.href = 'index.html'; // Redirect to home page
+        }
+    
+        // Close dropdown if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-icon')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        };
+    </script>
 
     <main>
         <section class="os">
@@ -87,37 +134,55 @@
 
     <script>
         // Retrieve cart data from localStorage
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const orderTableBody = document.querySelector('#ot tbody');
-        const totalAmountSpan = document.getElementById('ta');
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const orderTableBody = document.querySelector('#ot tbody');
+const totalAmountSpan = document.getElementById('ta');
 
-        // Populate the table with cart data
-        let totalAmount = 0;
-        cart.forEach(item => {
-            const row = document.createElement('tr');
-            const subtotal = item.price * item.quantity;
+// Populate the table with cart data
+let totalAmount = 0;
+cart.forEach(item => {
+    const row = document.createElement('tr');
+    const subtotal = item.price * item.quantity;
 
-            row.innerHTML = `
-                <td>${item.name}</td>
-                <td>₹${item.price}</td>
-                <td>${item.quantity}</td>
-                <td>₹${subtotal}</td>
-            `;
+    row.innerHTML = `
+        <td>${item.name}</td>
+        <td>₹${item.price}</td>
+        <td>${item.quantity}</td>
+        <td>₹${subtotal}</td>
+    `;
 
-            orderTableBody.appendChild(row);
-            totalAmount += subtotal;
-        });
+    orderTableBody.appendChild(row);
+    totalAmount += subtotal;
+});
 
-        // Update total amount
-        totalAmountSpan.textContent = totalAmount.toFixed(2);
+// Update total amount
+totalAmountSpan.textContent = totalAmount.toFixed(2);
 
-        // Handle checkout button
-        document.getElementById('cb').addEventListener('click', () => {
-            alert('Order placed successfully!');
-            // Clear the cart and redirect (optional)
-            localStorage.removeItem('cart');
-            window.location.href = 'index.html';
-        });
+// Handle checkout button
+document.getElementById('cb').addEventListener('click', () => {
+    alert('Order placed successfully!');
+
+    // Save order to localStorage for admin panel access
+    const orderDetails = {
+        id: `#${Math.floor(Math.random() * 1000)}`, // Generate a random Order ID
+        customerName: user.name,
+        items: cart,
+        total: totalAmount,
+        status: 'Pending',
+    };
+
+    // Retrieve existing orders from localStorage
+    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    existingOrders.push(orderDetails);
+    
+    // Save updated orders back to localStorage
+    localStorage.setItem('orders', JSON.stringify(existingOrders));
+
+    // Clear the cart and redirect (optional)
+    localStorage.removeItem('cart');
+    window.location.href = 'index.html';
+});
+
     </script>
 </body>
 </html>

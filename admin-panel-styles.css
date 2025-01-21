@@ -1,0 +1,456 @@
+/* Table Wrapper for Responsiveness */
+.table-wrapper {
+    margin: 20px; /* Margin around the table */
+    overflow-x: auto; /* Enable horizontal scrolling on small screens */
+    border: 1px solid #ddd; /* Optional border around the wrapper */
+    border-radius: 8px; /* Rounded corners for the wrapper */
+    background-color: #ffffff; /* Background color for better visibility */
+}
+
+/* Orders Table Styles */
+.orders-table {
+    width: 100%; /* Full width inside the wrapper */
+    border-collapse: separate; /* Separate borders for modern look */
+    border-spacing: 0; /* No space between cells */
+    margin: 20px;
+}
+
+.orders-table th, .orders-table td {
+    padding: 12px; /* Padding inside cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Bottom border for rows */
+}
+
+.orders-table th {
+    background-color: #0dcaf0; /* Header background color */
+    color: white; /* Header text color */
+}
+
+.orders-table tr:hover {
+    background-color: #f1faff; /* Highlight row on hover */
+}
+
+/* Alternating Row Colors */
+.orders-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd rows */
+}
+
+.orders-table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Status Styles (Badges) */
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status.pending {
+    background-color: #ffcc00; /* Yellow for pending status */
+    color: #333;
+}
+
+.status.done {
+    background-color: #4caf50; /* Green for done status */
+    color: white;
+}
+
+/* Button Styles in Action Column */
+button {
+    padding: 8px 15px;
+    background-color: #0dcaf0; /* Button background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #009688; /* Darker shade on hover */
+}
+
+
+/* Table Border Radius Fix (For Rounded Corners) */
+.orders-table th:first-child,
+.orders-table td:first-child {
+    border-top-left-radius: 10px;
+}
+
+.orders-table th:last-child,
+.orders-table td:last-child {
+    border-top-right-radius: 10px;
+}
+
+
+/* Button Styles */
+button {
+    padding: 8px 12px;
+    background-color: #0dcaf0; /* Button background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #009688; /* Darker shade on hover */
+}
+/* Ensure the body and html take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Main container to use flexbox layout */
+body {
+    display: flex;
+    flex-direction: column; /* Stack header, main, and footer vertically */
+}
+
+/* Main Content Styles */
+main {
+    flex-grow: 1; /* Allow main content to grow and take available space */
+}
+
+/* Footer Styles */
+footer {
+    background: #091f10; /* Background color for footer */
+    color: white; /* Footer text color */
+    padding: 20px 10px; /* Padding for footer */
+    text-align: center; /* Center align text in footer */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect for depth */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header {
+    background: linear-gradient(90deg, #092412, #0dcaf0);
+    color: white;
+    padding: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.headerdev{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.headerdev h1{
+    font-size: 50px;
+}
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+header nav ul li {
+    position: relative;
+}
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+header nav ul li a:hover {
+    background: #0dcaf0;
+    color: lightblue;
+    font-weight: bold;
+}
+header nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: white;
+    left: 50%;
+    bottom: 0;
+    transition: all 0.3s ease;
+}
+header nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+}
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-icon {
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.profile-icon:hover {
+    background-color: #0dcaf0;
+    color: #091f10;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none; /* Initially hidden */
+    position: absolute;
+    right: 0; /* Align to the right of the dropdown */
+    background-color: white;
+    min-width: 200px; /* Adjust width for better spacing */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1; /* Ensure it appears above other elements */
+}
+
+.dropdown-content p {
+    margin: 10px; /* Add spacing between text */
+    font-size: 14px;
+    color: #333; /* Darker text for readability */
+}
+
+.dropdown-content p:first-child {
+    font-weight: bold; /* Highlight the user's name */
+}
+
+.dropdown-content a {
+    display: block; /* Make links take up full width */
+    padding: 10px 15px; /* Add padding for better spacing */
+    text-decoration: none; /* Remove underline from links */
+    color: #091f10; /* Dark green for links */
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1; /* Light gray hover effect */
+}
+
+/* Divider between sections in dropdown */
+.dropdown-content hr {
+    border: none; /* Remove default border style */
+    border-top: 1px solid #ddd; /* Light gray line */
+    margin: 10px 0; /* Add spacing around divider */
+}
+
+.hero {
+    text-align: center;
+    padding: 150px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(assets/hero-img.jpg);
+    background-position: center;
+    background-size: cover; /* Use 'cover' to ensure full background coverage */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.hero h1 {
+    font-size: 60px;
+    font-weight: bolder;
+    color: white;
+
+}
+.hero p {
+    font-size: 30px;
+    color: white;
+}
+.button {
+    background: #091f10;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 24px;
+    transition: background 0.3s ease;
+}
+.button:hover {
+    background: #0dcaf0;
+}
+.review {
+    background: #f9f9f9;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+    text-align: center;
+}
+.review h2 {
+    font-size: 36px;
+    color: #092412;
+    margin-bottom: 20px;
+}
+.review {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.review p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+.review p:first-child {
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #333;
+}
+.review p:last-child {
+    font-weight: bold;
+    color: #092412;
+}
+footer {
+    background: #091f10;
+    color: white;
+    padding: 20px 10px;
+    text-align: center;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+.fc {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.fs {
+    margin: 10px;
+    flex: 1;
+    min-width: 250px;
+}
+.fs h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: white;
+    border-bottom: 2px solid #ffffff50;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+.fs p, .fs ul, .fs ul li {
+    color: #f9f9f9;
+    margin: 5px 0;
+}
+.fs ul {
+    list-style-type: none;
+    padding: 0;
+}
+.fs ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.fs ul li a:hover {
+    color: #ddd;
+}
+.sl {
+    margin-top: 10px;
+}
+.sl a img {
+    width: 30px;
+    margin: 0 5px;
+    transition: transform 0.3s;
+}
+.sl a img:hover {
+    transform: scale(1.2);
+}
+.fb {
+    font-size: 14px;
+    color: #ddd;
+    border-top: 1px solid #ffffff50;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .headerdev {
+        flex-direction: column;
+        text-align: center;
+    }
+    .headerdev h1 {
+        font-size: 28px;
+    }
+    .hero {
+        padding: 80px 10px;
+    }
+    .hero h1 {
+        font-size: 30px;
+    }
+    .hero p {
+        font-size: 16px;
+    }
+    .reviews {
+        margin: 10px;
+        padding: 15px;
+    }
+    footer {
+        padding: 10px;
+    }
+    .fs {
+        flex-direction: column;
+    }
+    .fs {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        padding: 20px 10px;
+    }
+    .headerdev h1 {
+        font-size: 24px;
+    }
+    header nav ul li a {
+        font-size: 14px;
+    }
+    .hero {
+        padding: 60px 10px;
+    }
+    .hero h1 {
+        font-size: 24px;
+    }
+    .hero p {
+        font-size: 14px;
+    }
+    .button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+    .review h2 {
+        font-size: 22px;
+    }
+    .review p {
+        font-size: 14px;
+    }
+    .fs h3 {
+        font-size: 16px;
+    }
+    .fs p {
+        font-size: 12px;
+    }
+    .sl a img {
+        width: 20px;
+    }
+}

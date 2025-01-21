@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - VIT Canteen</title>
+    <link rel="stylesheet" href="admin-panel-styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <header>
+        <div class="headerdev">
+            <div>
+                <h1>VIT Canteen</h1>
+            </div>
+            <div>
+                <nav>
+                    <ul id="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="order.html">Order Now</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <!-- Admin Panel link (visible by default) -->
+                        <li id="admin-panel-link"><a href="#">Admin Panel</a></li>
+                        <!-- Profile dropdown -->
+                        <li id="auth-link">
+                            <!-- Default login link -->
+                            <a href="login.html">Login</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>  
+        </div>  
+    </header>
+
+    <main>
+        
+
+        <!-- Orders Table -->
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Order Details</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="orders-body">
+                <!-- Orders will be dynamically populated here -->
+            </tbody>
+        </table>
+        
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="fc">
+            <!-- About Us Section -->
+            <div class="fsa">
+                <h3>About Us</h3>
+                <p>We aim to provide delicious and hygienic food to all students and staff at VIT. Our focus is on quality, affordability, and quick service.</p>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="sl">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="menu.html">Our Menu</a></li>
+                    <li><a href="order.html">Order Now</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Us Section -->
+            <div class="fsc">
+                <h3>Contact Us</h3>
+                <p>Email: director@vit.edu </p>
+                <p>Phone: +91 020-24202290</p>
+
+                <!-- Social Media Links -->
+                <div class="sl">
+                    <a href="#"><img src="assets/facebook.svg" alt="Facebook"></a>
+                    <a href="#"><img src="assets/instagram.svg" alt="Instagram"></a>
+                    <a href="#"><img src="assets/twitter.svg" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Copyright -->
+        <p class="fb">&copy; 2025 VIT Canteen. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for order actions -->
+    <script>
+// Function to populate orders table from localStorage
+function populateOrdersTable() {
+    const ordersBody = document.querySelector('#orders-body');
+    
+    // Retrieve orders from localStorage
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+    // Clear existing rows
+    ordersBody.innerHTML = '';
+
+    // Populate table with orders
+    orders.forEach(order => {
+        const row = document.createElement('tr');
+        const itemsDetails = order.items.map(item => `${item.quantity}x ${item.name}`).join(', ');
+
+        row.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.customerName}</td>
+            <td>${itemsDetails}</td>
+            <td><span class="status ${order.status === 'Pending' ? 'pending' : 'done'}">${order.status}</span></td>
+            <td><button onclick="markAsDone('${order.id}')">Mark as Done</button></td>
+        `;
+        
+        ordersBody.appendChild(row);
+    });
+}
+
+// Call function to populate table on load
+populateOrdersTable();
+
+// Function to mark an order as done
+function markAsDone(orderId) {
+    const rows = document.querySelectorAll('#orders-body tr');
+    
+    rows.forEach(row => {
+        if (row.cells[0].textContent === orderId) {
+            row.cells[3].innerHTML = '<span class="status done">Done</span>'; // Update status
+        }
+    });
+
+    // Optional: Update stored orders in localStorage (if you want to persist changes)
+}
+
+    </script>
+
+</body>
+</html>
+
