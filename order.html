@@ -155,33 +155,39 @@ cart.forEach(item => {
     totalAmount += subtotal;
 });
 
-// Update total amount
-totalAmountSpan.textContent = totalAmount.toFixed(2);
-
-// Handle checkout button
 document.getElementById('cb').addEventListener('click', () => {
-    alert('Order placed successfully!');
-
-    // Save order to localStorage for admin panel access
     const orderDetails = {
-        id: `#${Math.floor(Math.random() * 1000)}`, // Generate a random Order ID
-        customerName: user.name,
+        customerName: sessionStorage.getItem('userName') || "Guest", // Use session storage for user name
         items: cart,
         total: totalAmount,
         status: 'Pending',
     };
 
-    // Retrieve existing orders from localStorage
-    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    existingOrders.push(orderDetails);
-    
-    // Save updated orders back to localStorage
-    localStorage.setItem('orders', JSON.stringify(existingOrders));
-
-    // Clear the cart and redirect (optional)
-    localStorage.removeItem('cart');
-    window.location.href = 'index.html';
+    // Send order details to the backend
+    fetch('/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderDetails),
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('Order placed successfully!');
+                localStorage.removeItem('cart'); // Clear cart after placing order
+                window.location.href = 'index.html'; // Redirect to home page
+            } else {
+                alert('Failed to place order. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error placing order:', error);
+            alert('An error occurred while placing your order.');
+        });
 });
+
+
+
 
     </script>
 </body>

@@ -19,7 +19,7 @@
             </div>
 
             <!-- User Login Form -->
-            <form id="user-login-form" class="login-form active" action="/login" method="POST">
+            <form id="user-login-form" class="login-form active" action="/login" method="POST" onsubmit="return validateUserForm()">
                 <input type="hidden" name="role" value="user">
                 <div class="form-group">
                     <label for="user-email">Email:</label>
@@ -31,24 +31,25 @@
                 </div>
                 <button type="submit" class="login-button">Login as User</button>
             </form>
-            
 
             <!-- Admin Login Form -->
-            <form id="admin-login-form" class="login-form" action="/login" method="POST">
-                <input type="hidden" name="role" value="admin">
-                <div class="form-group">
-                    <label for="admin-username">Username:</label>
-                    <input type="text" id="admin-username" name="username" placeholder="Enter admin username" required>
-                </div>
-                <div class="form-group">
-                    <label for="admin-password">Password:</label>
-                    <input type="password" id="admin-password" name="password" placeholder="Enter admin password" required>
-                </div>
-                <button type="submit" class="login-button">Login as Admin</button>
-            </form>
-            
+<form id="admin-login-form" class="login-form" action="/login" method="POST">
+    <input type="hidden" name="role" value="admin"> <!-- Keep this hidden input -->
+    <div class="form-group">
+        <label for="admin-email">Email:</label> <!-- Change label for clarity -->
+        <input type="email" id="admin-email" name="email" placeholder="Enter admin email" required> <!-- Change input name -->
+    </div>
+    <div class="form-group">
+        <label for="admin-password">Password:</label>
+        <input type="password" id="admin-password" name="password" placeholder="Enter admin password" required>
+    </div>
+    <button type="submit" class="login-button">Login as Admin</button>
+</form>
 
-            <p class="signup-text">For user accounts only: <a href="signup.html">Sign up here</a>.</p>
+
+            <!-- Links to Signup Pages -->
+            <p class="signup-text">For user accounts only: <a href="/signup.html">Sign up here</a>.</p>
+            <p class="signup-text">For admin accounts: <a href="/admin-signup.html">Sign up as Admin</a>.</p> 
         </div>
     </div>
 
@@ -72,6 +73,34 @@
             adminLoginForm.classList.add('active');
             userLoginForm.classList.remove('active');
         });
+
+        // Validation for User Login Form
+        function validateUserForm() {
+            const email = document.getElementById('user-email').value;
+            const password = document.getElementById('user-password').value;
+
+            if (!email || !password) {
+                alert("Both fields are required.");
+                return false;
+            }
+            
+            // Additional validation can be added here (e.g., regex for email format)
+            return true; // Proceed with form submission
+        }
+
+        // Validation for Admin Login Form
+        function validateAdminForm() {
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+
+            if (!username || !password) {
+                alert("Both fields are required.");
+                return false;
+            }
+            
+            // Additional validation can be added here (e.g., regex for username format)
+            return true; // Proceed with form submission
+        }
     </script>
 </body>
 </html>

@@ -97,45 +97,46 @@
 // Function to populate orders table from localStorage
 function populateOrdersTable() {
     const ordersBody = document.querySelector('#orders-body');
-    
-    // Retrieve orders from localStorage
-    const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
-    // Clear existing rows
-    ordersBody.innerHTML = '';
+    fetch('/orders') // Fetch orders from the server
+        .then(response => response.json())
+        .then(orders => {
+            // Clear existing rows
+            ordersBody.innerHTML = '';
 
-    // Populate table with orders
-    orders.forEach(order => {
-        const row = document.createElement('tr');
-        const itemsDetails = order.items.map(item => `${item.quantity}x ${item.name}`).join(', ');
-
-        row.innerHTML = `
-            <td>${order.id}</td>
-            <td>${order.customerName}</td>
-            <td>${itemsDetails}</td>
-            <td><span class="status ${order.status === 'Pending' ? 'pending' : 'done'}">${order.status}</span></td>
-            <td><button onclick="markAsDone('${order.id}')">Mark as Done</button></td>
-        `;
-        
-        ordersBody.appendChild(row);
-    });
+            // Populate table with orders
+            orders.forEach(order => {
+                const itemsDetails = order.items.map(item => `${item.quantity}x ${item.name}`).join(', ');
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order._id}</td> <!-- Use MongoDB's _id -->
+                    <td>${order.customerName}</td>
+                    <td>${itemsDetails}</td>
+                    <td><span class="status ${order.status === 'Pending' ? 'pending' : 'done'}">${order.status}</span></td>
+                    <td><button onclick="markAsDone('${order._id}')">Mark as Done</button></td> <!-- Use _id for marking as done -->
+                `;
+                
+                ordersBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching orders:', error));
 }
+
 
 // Call function to populate table on load
 populateOrdersTable();
 
-// Function to mark an order as done
 function markAsDone(orderId) {
-    const rows = document.querySelectorAll('#orders-body tr');
-    
-    rows.forEach(row => {
-        if (row.cells[0].textContent === orderId) {
-            row.cells[3].innerHTML = '<span class="status done">Done</span>'; // Update status
-        }
-    });
-
-    // Optional: Update stored orders in localStorage (if you want to persist changes)
+    fetch(`/orders/${orderId}`, { method: 'PATCH' }) // Send a PATCH request to update the status
+        .then(response => response.json())
+        .then(updatedOrder => {
+            populateOrdersTable(); // Refresh the table after updating status
+        })
+        .catch(error => console.error('Error updating order status:', error));
 }
+
+
 
     </script>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,20 +33,18 @@
     </header>
 
     <script>
-        // Example user data (replace with actual data from backend)
-        const user = { name: "John Doe", email: "john.doe@example.com", role: "user" }; // Change role as needed for testing
-
         // Check if logged in (sessionStorage example)
         if (sessionStorage.getItem('loggedIn') === 'true') {
             const authLink = document.getElementById('auth-link');
-            
+            const userName = sessionStorage.getItem('userName') || "User"; // Get username from session storage
+
             // Replace login link with profile dropdown
             authLink.innerHTML = `
                 <div class="dropdown">
-                    <span class="profile-icon" onclick="toggleDropdown()">${user.name}</span> <!-- Profile Name -->
+                    <span class="profile-icon" onclick="toggleDropdown()">${userName}</span> <!-- Profile Name -->
                     <div class="dropdown-content" id="dropdown-content">
-                        <p><strong>${user.name}</strong></p> <!-- User Name -->
-                        <p>${user.email}</p> <!-- User Email -->
+                        <p><strong>${userName}</strong></p> <!-- User Name -->
+                        <p>${sessionStorage.getItem('userEmail')}</p> <!-- User Email -->
                         <hr />
                         <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
                     </div>
@@ -68,6 +66,8 @@
         function logout() {
             sessionStorage.removeItem('loggedIn'); // Clear login status
             sessionStorage.removeItem('isAdmin'); // Clear admin status
+            sessionStorage.removeItem('userName'); // Clear username
+            sessionStorage.removeItem('userEmail'); // Clear email
             window.location.href = 'index.html'; // Redirect to home page
         }
 
@@ -91,8 +91,7 @@
                 <h1>Welcome to VIT Snacks Center!</h1>
                 <p>Delicious and Instant meals and snacks at your fingertips.</p>
                 <a href="menu.html" class="button">View Menu</a>
-            </div>
-            
+            </div>  
         </section>
     </main>
 
@@ -149,4 +148,3 @@
 
 </body>
 </html>
-
