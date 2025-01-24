@@ -140,20 +140,30 @@ const totalAmountSpan = document.getElementById('ta');
 
 // Populate the table with cart data
 let totalAmount = 0;
-cart.forEach(item => {
-    const row = document.createElement('tr');
-    const subtotal = item.price * item.quantity;
 
-    row.innerHTML = `
-        <td>${item.name}</td>
-        <td>₹${item.price}</td>
-        <td>${item.quantity}</td>
-        <td>₹${subtotal}</td>
-    `;
+// Check if cart is empty
+if (cart.length === 0) {
+    orderTableBody.innerHTML = "<tr><td colspan='4'>No items in the cart</td></tr>";
+} else {
+    cart.forEach(item => {
+        const row = document.createElement('tr');
+        const subtotal = item.price * item.quantity;
 
-    orderTableBody.appendChild(row);
-    totalAmount += subtotal;
-});
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>₹${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>₹${subtotal}</td>
+        `;
+
+        orderTableBody.appendChild(row);
+        totalAmount += subtotal;
+    });
+}
+
+// Update the total amount display
+totalAmountSpan.textContent = totalAmount;
+
 
 document.getElementById('cb').addEventListener('click', () => {
     const orderDetails = {
