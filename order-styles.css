@@ -211,6 +211,37 @@ main {
     margin-top: 20px;
 }
 
+.estimated-time {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.estimated-time span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scrollText 10s linear infinite;
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
 .notes {
     width: 60%;
 }

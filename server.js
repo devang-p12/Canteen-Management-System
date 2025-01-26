@@ -183,6 +183,26 @@ app.patch('/orders/:id', async (req, res) => {
     }
 });
 
+// Add this route to your Express server
+app.get('/orders/estimated-time', async (req, res) => {
+    try {
+        // Count the number of pending orders
+        const pendingOrdersCount = await Order.countDocuments({ status: 'Pending' });
+
+        // Define the average preparation time (e.g., 10 minutes per order)
+        const avgPreparationTime = 10; // minutes
+
+        // Calculate the estimated time
+        const estimatedTime = pendingOrdersCount * avgPreparationTime;
+
+        res.status(200).json({ estimatedTime, pendingOrdersCount });
+    } catch (error) {
+        console.error('Error calculating estimated time:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

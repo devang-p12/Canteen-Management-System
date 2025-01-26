@@ -99,6 +99,9 @@
                     <h3>Total Amount: ₹<span id="ta">0</span></h3>
                 </div>
             </div>
+            <div id="order-estimated-time" class="estimated-time" style="margin: 15px 0; font-size: 16px; color: #333;">
+                <!-- Estimated time will be dynamically populated -->
+            </div>
             <button id="cb" class="button">Checkout</button>
         </section>
     </main>
@@ -195,6 +198,24 @@ document.getElementById('cb').addEventListener('click', () => {
             alert('An error occurred while placing your order.');
         });
 });
+
+// Function to fetch and display estimated time in order page
+function displayEstimatedTimeOnOrderPage() {
+    fetch('/orders/estimated-time')
+        .then(response => response.json())
+        .then(data => {
+            const { estimatedTime } = data;
+
+            // Display the estimated time
+            const estimatedTimeDiv = document.getElementById('order-estimated-time');
+            estimatedTimeDiv.textContent = `Estimated Delivery Time: ${estimatedTime} minutes`;
+        })
+        .catch(error => console.error('Error fetching estimated time:', error));
+}
+
+// Call this function on page load
+displayEstimatedTimeOnOrderPage();
+
 
 
 
