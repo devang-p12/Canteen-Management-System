@@ -31,6 +31,104 @@
             </div>  
         </div>  
     </header>
+    <script>
+        // Check if logged in (sessionStorage example)
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            const authLink = document.getElementById('auth-link');
+            const userName = sessionStorage.getItem('userName') || "User"; // Get username from session storage
+
+            // Replace login link with profile dropdown
+            authLink.innerHTML = `
+                <div class="dropdown">
+                    <span class="profile-icon" onclick="toggleDropdown()">${userName}</span> <!-- Profile Name -->
+                    <div class="dropdown-content" id="dropdown-content">
+                        <p><strong>${userName}</strong></p> <!-- User Name -->
+                        <p>${sessionStorage.getItem('userEmail')}</p> <!-- User Email -->
+                        <hr />
+                        <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
+                    </div>
+                </div>`;
+            
+            // Check if user is admin
+            if (sessionStorage.getItem('isAdmin') === 'true') {
+                document.getElementById('admin-panel-link').style.display = 'block'; // Show Admin Panel link
+            }
+        }
+
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdown-content');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('loggedIn'); // Clear login status
+            sessionStorage.removeItem('isAdmin'); // Clear admin status
+            sessionStorage.removeItem('userName'); // Clear username
+            sessionStorage.removeItem('userEmail'); // Clear email
+            window.location.href = 'index.html'; // Redirect to home page
+        }
+
+        // Close dropdown if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-icon')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        };
+    </script>
+    <script>
+        // Example user data (replace with actual data from backend if needed)
+        const user = { name: "John Doe", email: "john.doe@example.com" };
+    
+        // Check if logged in (sessionStorage example)
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            const authLink = document.getElementById('auth-link');
+            
+            // Replace login link with profile dropdown
+            authLink.innerHTML = `
+                <div class="dropdown">
+                    <span class="profile-icon" onclick="toggleDropdown()">${user.name}</span> <!-- Profile Name -->
+                    <div class="dropdown-content" id="dropdown-content">
+                        <p><strong>${user.name}</strong></p> <!-- User Name -->
+                        <p>${user.email}</p> <!-- User Email -->
+                        <hr />
+                        <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
+                    </div>
+                </div>`;
+        }
+    
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdown-content');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+    
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('loggedIn'); // Clear login status
+            window.location.href = 'index.html'; // Redirect to home page
+        }
+    
+        // Close dropdown if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-icon')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        };
+    </script>
 
     <main>
         <div id="estimated-time" style="margin-bottom: 20px; font-size: 16px; color: #333;">

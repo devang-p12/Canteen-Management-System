@@ -1,85 +1,64 @@
-/* Resetting some basic styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body and basic font styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-/* Header Styling */
 header {
-    background: linear-gradient(90deg, #092412, #0dcaf0); /* Same gradient as index.html */
+    background: linear-gradient(90deg, #092412, #0dcaf0);
     color: white;
-    padding: 20px 10%; /* Adjusted padding for better spacing */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
-    align-items: center;
+    padding: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
-
-.header-dev {
+.headerdev{
     display: flex;
-    justify-content: space-between; /* Space between title and navigation */
+    justify-content: space-around;
     align-items: center;
 }
-
-.header-dev h1 {
-    font-size: 50px; /* Consistent font size */
-    font-weight: bold; /* Make it stand out */
-    margin-right: 20px; /* Add spacing between title and nav */
+.headerdev h1{
+    font-size: 50px;
 }
-
 header nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: flex-end; /* Align nav items to the right */
+    justify-content: space-around;
     align-items: center;
-    gap: 20px; /* Add spacing between nav items */
+    gap: 20px;
 }
-
 header nav ul li {
     position: relative;
 }
-
 header nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 18px; /* Consistent font size */
-    padding: 8px 15px; /* Add padding for better clickability */
-    border-radius: 5px; /* Rounded corners for links */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
-
 header nav ul li a:hover {
-    background-color: white; /* Highlight link on hover */
-    color: #092412; /* Dark green text on hover */
-    font-weight: bold; /* Bold text on hover for emphasis */
+    background: #0dcaf0;
+    color: lightblue;
+    font-weight: bold;
 }
-
 header nav ul li a::after {
     content: "";
     position: absolute;
     width: 0;
     height: 2px;
-    background-color: white;
+    background: white;
     left: 50%;
-    bottom: -5px; /* Add space below link for underline effect */
+    bottom: 0;
     transition: all 0.3s ease;
 }
-
 header nav ul li a:hover::after {
-    width: 100%; /* Full underline on hover */
+    width: 100%;
     left: 0;
 }
-
-
 /* Dropdown Container */
 .dropdown {
     position: relative;
@@ -141,14 +120,6 @@ header nav ul li a:hover::after {
     border: none; /* Remove default border style */
     border-top: 1px solid #ddd; /* Light gray line */
     margin: 10px 0; /* Add spacing around divider */
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
 }
 
 
@@ -220,7 +191,77 @@ body {
 
 
 
-    
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+footer {
+background: #091f10;
+color: white;
+padding: 20px 10px;
+text-align: center;
+box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+.footer-content {
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+margin-bottom: 20px;
+}
+.footer-section {
+margin: 10px;
+flex: 1;
+min-width: 250px;
+}
+.footer-section h3 {
+margin-bottom: 10px;
+font-size: 20px;
+color: white;
+border-bottom: 2px solid #ffffff50;
+display: inline-block;
+padding-bottom: 5px;
+}
+.footer-section p, .footer-section ul, .footer-section ul li {
+color: #f9f9f9;
+margin: 5px 0;
+}
+.footer-section ul {
+list-style-type: none;
+padding: 0;
+}
+.footer-section ul li a {
+color: white;
+text-decoration: none;
+transition: color 0.3s;
+}
+.footer-section ul li a:hover {
+color: #ddd;
+}
+.social-links {
+margin-top: 10px;
+}
+.social-links a img {
+width: 30px;
+margin: 0 5px;
+transition: transform 0.3s;
+}
+.social-links a img:hover {
+transform: scale(1.2);
+}
+.footer-bottom {
+font-size: 14px;
+color: #ddd;
+border-top: 1px solid #ffffff50;
+padding-top: 10px;
+}
 
 /* Responsive Design */
 .fi{
@@ -345,26 +386,6 @@ body {
     transform: scale(0.98);
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .qc {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .qc label {
-        margin-bottom: 5px;
-    }
-
-    .qc .quantity {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .atc  {
-        width: 100%;
-    }
-}
 
 
 /* Button Styling */
@@ -462,14 +483,23 @@ padding-top: 10px;
 
 
 
+/* Existing styles remain unchanged */
+
+/* Responsive Design */
 @media (max-width: 1024px) {
     /* Reduce menu to two columns for tablets */
-    .mi {
+    .mis {
         grid-template-columns: repeat(2, 1fr);
     }
 
     header {
+        padding: 15px 5%;
         text-align: center;
+    }
+
+    .header-dev {
+        flex-direction: column;
+        gap: 10px;
     }
 
     .header-dev h1 {
@@ -477,14 +507,15 @@ padding-top: 10px;
     }
 
     header nav ul {
-        flex-direction: column;
+        flex-direction: row;
         gap: 10px;
+        justify-content: center;
     }
 }
 
 @media (max-width: 768px) {
     /* Single column menu for smaller devices */
-    .mi {
+    .mis {
         grid-template-columns: 1fr;
     }
 
@@ -493,29 +524,22 @@ padding-top: 10px;
     }
 
     header {
-        padding: 15px;
+        padding: 10px 5%;
     }
+
     .header-dev h1 {
-        font-size: 30px;
+        font-size: 28px;
+        text-align: center;
     }
 
-    header nav ul li a {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    /* Stack content vertically for mobile */
     header nav ul {
         flex-direction: column;
-        gap: 5px;
+        gap: 8px;
+        padding: 0;
     }
+
     header nav ul li a {
-        padding: 5px 8px;
-        font-size: 12px;
-    }
-    .header-dev h1 {
-        font-size: 24px;
+        font-size: 16px;
     }
 
     .mi {
@@ -523,10 +547,67 @@ padding-top: 10px;
     }
 
     .cs {
-        padding: 10px;
+        padding: 15px;
     }
 
     footer {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Stack content vertically for mobile */
+    header {
+        padding: 10px 3%;
+    }
+
+    .header-dev h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    header nav ul li a {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .ms {
+        padding: 15px;
+    }
+
+    .mis {
+        gap: 10px;
+    }
+
+    .mi {
         padding: 10px;
+    }
+
+    .cs {
+        padding: 10px;
+        margin: 20px auto;
+    }
+
+    .qc {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .atc, #pto {
+        width: 100%;
+    }
+
+    footer {
+        padding: 10px 5px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 10px;
     }
 }

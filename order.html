@@ -10,7 +10,7 @@
     <header>
         <div class="headerdev">
             <div>
-                <h1>VIT Canteen</h1>
+                <h1>Ezzy Canteen</h1>
             </div>
             <div>
                 <nav>
@@ -19,12 +19,70 @@
                         <li><a href="menu.html">Menu</a></li>
                         <li><a href="order.html">Order Now</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li id="auth-link"><a href="login.html">Login</a></li>
+                        <!-- Admin Panel link (hidden by default) -->
+                        <li id="admin-panel-link" style="display: none;"><a href="admin-panel.html">Admin Panel</a></li>
+                        <!-- Profile dropdown -->
+                        <li id="auth-link">
+                            <!-- Default login link -->
+                            <a href="login.html">Login</a>
+                        </li>
                     </ul>
                 </nav>
             </div>  
         </div>  
     </header>
+    <script>
+        // Check if logged in (sessionStorage example)
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            const authLink = document.getElementById('auth-link');
+            const userName = sessionStorage.getItem('userName') || "User"; // Get username from session storage
+
+            // Replace login link with profile dropdown
+            authLink.innerHTML = `
+                <div class="dropdown">
+                    <span class="profile-icon" onclick="toggleDropdown()">${userName}</span> <!-- Profile Name -->
+                    <div class="dropdown-content" id="dropdown-content">
+                        <p><strong>${userName}</strong></p> <!-- User Name -->
+                        <p>${sessionStorage.getItem('userEmail')}</p> <!-- User Email -->
+                        <hr />
+                        <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
+                    </div>
+                </div>`;
+            
+            // Check if user is admin
+            if (sessionStorage.getItem('isAdmin') === 'true') {
+                document.getElementById('admin-panel-link').style.display = 'block'; // Show Admin Panel link
+            }
+        }
+
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdown-content');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('loggedIn'); // Clear login status
+            sessionStorage.removeItem('isAdmin'); // Clear admin status
+            sessionStorage.removeItem('userName'); // Clear username
+            sessionStorage.removeItem('userEmail'); // Clear email
+            window.location.href = 'index.html'; // Redirect to home page
+        }
+
+        // Close dropdown if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-icon')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        };
+    </script>
 
     <script>
         // Example user data (replace with actual data from backend if needed)
@@ -107,13 +165,14 @@
     </main>
     
 
+    <!-- Footer -->
     <footer>
-        <div class="fc">
-            <div class="fsa">
+        <div class="footer-content">
+            <div class="footer-section about">
                 <h3>About Us</h3>
                 <p>We aim to provide delicious and hygienic food to all students and staff at VIT. Our focus is on quality, affordability, and quick service.</p>
             </div>
-            <div class="fsl">
+            <div class="footer-section links">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="menu.html">Our Menu</a></li>
@@ -121,18 +180,18 @@
                     <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
-            <div class="fsc">
+            <div class="footer-section contact">
                 <h3>Contact Us</h3>
                 <p>Email: support@vitcanteen.com</p>
                 <p>Phone: +91 9999999999</p>
-                <div class="sl">
+                <div class="social-links">
                     <a href="#"><img src="assets/facebook.svg" alt="Facebook"></a>
                     <a href="#"><img src="assets/instagram.svg" alt="Instagram"></a>
                     <a href="#"><img src="assets/twitter.svg" alt="Twitter"></a>
                 </div>
             </div>
         </div>
-        <p class="fb">&copy; 2024 VIT Canteen. All rights reserved.</p>
+        <p class="footer-bottom">&copy; 2024 Ezzy Canteen. All rights reserved.</p>
     </footer>
 
     <script>
