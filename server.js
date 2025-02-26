@@ -35,14 +35,39 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // Define Order schema and model
+
+
+// Define Order schema and model
 const orderSchema = new mongoose.Schema({
+    orderId: { type: Number, unique: true, index: true }, // Sequential order ID
     customerName: String,
     items: Array,
     total: Number,
     status: { type: String, default: 'Pending' }
+}, { timestamps: true }); // Add timestamps for automatic createdAt and updatedAt
+
+// Pre-save middleware to generate sequential order ID
+orderSchema.pre('save', async function (next) {
+    if (!this.isNew) {
+        return next();
+    }
+
+    try {
+        // Find the highest existing order ID
+        const lastOrder = await this.constructor.findOne({}, { orderId: 1 }, { sort: { orderId: -1 } }).exec();
+
+        // Determine the next order ID
+        this.orderId = lastOrder ? lastOrder.orderId + 1 : 1;
+
+        next();
+    } catch (error) {
+        console.error('Error generating order ID:', error);
+        next(error);
+    }
 });
 
 const Order = mongoose.model('Order', orderSchema);
+
 
 
 // Serve the homepage (index.html)
@@ -201,6 +226,20 @@ app.get('/orders/estimated-time', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+// Endpoint to delete all orders (use with caution!)
+app.delete('/orders', async (req, res) => {
+    try {
+        const result = await Order.deleteMany({}); // Delete all documents in the Order collection
+
+        console.log(`Deleted ${result.deletedCount} orders`);
+        res.status(200).send({ message: `Deleted ${result.deletedCount} orders` });
+    } catch (error) {
+        console.error('Error deleting orders:', error);
+        res.status(500).send({ message: 'Error deleting orders' });
+    }
+});
+
 
 
 // Start the server

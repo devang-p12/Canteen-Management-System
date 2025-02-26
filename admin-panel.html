@@ -28,8 +28,8 @@
                         </li>
                     </ul>
                 </nav>
-            </div>  
-        </div>  
+            </div>
+        </div>
     </header>
     <script>
         // Check if logged in (sessionStorage example)
@@ -48,7 +48,7 @@
                         <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
                     </div>
                 </div>`;
-            
+
             // Check if user is admin
             if (sessionStorage.getItem('isAdmin') === 'true') {
                 document.getElementById('admin-panel-link').style.display = 'block'; // Show Admin Panel link
@@ -86,11 +86,11 @@
     <script>
         // Example user data (replace with actual data from backend if needed)
         const user = { name: "John Doe", email: "john.doe@example.com" };
-    
+
         // Check if logged in (sessionStorage example)
         if (sessionStorage.getItem('loggedIn') === 'true') {
             const authLink = document.getElementById('auth-link');
-            
+
             // Replace login link with profile dropdown
             authLink.innerHTML = `
                 <div class="dropdown">
@@ -103,19 +103,19 @@
                     </div>
                 </div>`;
         }
-    
+
         // Toggle dropdown visibility
         function toggleDropdown() {
             const dropdownContent = document.getElementById('dropdown-content');
             dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
         }
-    
+
         // Logout function
         function logout() {
             sessionStorage.removeItem('loggedIn'); // Clear login status
             window.location.href = 'index.html'; // Redirect to home page
         }
-    
+
         // Close dropdown if clicked outside
         window.onclick = function(event) {
             if (!event.target.matches('.profile-icon')) {
@@ -129,12 +129,13 @@
             }
         };
     </script>
-
     <main>
+        <!-- Clear Orders Button -->
+        <button id="clear-orders-button" style="margin-bottom: 20px; padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;">Clear All Orders</button>
+
         <div id="estimated-time" style="margin-bottom: 20px; font-size: 16px; color: #333;">
             <!-- This will be dynamically populated -->
         </div>
-        
 
         <!-- Orders Table -->
         <table class="orders-table">
@@ -143,7 +144,6 @@
                     <th>Order ID</th>
                     <th>Customer Name</th>
                     <th>Order Details</th>
-                    <th><div id="estimated-time"></div></th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -152,7 +152,6 @@
                 <!-- Orders will be dynamically populated here -->
             </tbody>
         </table>
-        
 
     </main>
 
@@ -196,73 +195,83 @@
 
     <!-- JavaScript for order actions -->
     <script>
-// Function to populate orders table from localStorage
-function populateOrdersTable() {
-    const ordersBody = document.querySelector('#orders-body');
+        // Function to populate orders table from localStorage
+        function populateOrdersTable() {
+            const ordersBody = document.querySelector('#orders-body');
 
-    fetch('/orders') // Fetch orders from the server
-        .then(response => response.json())
-        .then(orders => {
-            // Clear existing rows
-            ordersBody.innerHTML = '';
+            fetch('/orders') // Fetch orders from the server
+                .then(response => response.json())
+                .then(orders => {
+                    // Clear existing rows
+                    ordersBody.innerHTML = '';
 
-            // Populate table with orders
-            orders.forEach(order => {
-                const itemsDetails = order.items.map(item => `${item.quantity}x ${item.name}`).join(', ');
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${order._id}</td> <!-- Use MongoDB's _id -->
-                    <td>${order.customerName}</td>
-                    <td>${itemsDetails}</td>
-                    <td><span class="status ${order.status === 'Pending' ? 'pending' : 'done'}">${order.status}</span></td>
-                    <td><button onclick="markAsDone('${order._id}')">Mark as Done</button></td> <!-- Use _id for marking as done -->
-                `;
-                
-                ordersBody.appendChild(row);
-            });
-        })
-        .catch(error => console.error('Error fetching orders:', error));
-}
+                    // Populate table with orders
+                    orders.forEach(order => {
+                        const itemsDetails = order.items.map(item => `${item.quantity}x ${item.name}`).join(', ');
 
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${order.orderId}</td> <!-- Use MongoDB's _id -->
+                            <td>${order.customerName}</td>
+                            <td>${itemsDetails}</td>
+                            <td>${order.status}</td>
+                            <td><button onclick="markAsDone('${order._id}')">Mark as Done</button></td> <!-- Use _id for marking as done -->
+                        `;
 
-// Call function to populate table on load
-populateOrdersTable();
+                        ordersBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching orders:', error));
+        }
 
-function markAsDone(orderId) {
-    fetch(`/orders/${orderId}`, { method: 'PATCH' }) // Send a PATCH request to update the status
-        .then(response => response.json())
-        .then(updatedOrder => {
-            populateOrdersTable(); // Refresh the table after updating status
-        })
-        .catch(error => console.error('Error updating order status:', error));
-}
+        // Call function to populate table on load
+        populateOrdersTable();
 
-// Function to fetch and display estimated time in admin panel
-function displayEstimatedTime() {
-    fetch('/orders/estimated-time')
-        .then(response => response.json())
-        .then(data => {
-            const { estimatedTime, pendingOrdersCount } = data;
+        function markAsDone(orderId) {
+            fetch(`/orders/${orderId}`, { method: 'PATCH' }) // Send a PATCH request to update the status
+                .then(response => response.json())
+                .then(updatedOrder => {
+                    populateOrdersTable(); // Refresh the table after updating status
+                })
+                .catch(error => console.error('Error updating order status:', error));
+        }
 
-            // Display the estimated time in the admin panel
-            const estimatedTimeDiv = document.getElementById('estimated-time');
-            estimatedTimeDiv.innerHTML = `
+        // Function to fetch and display estimated time in admin panel
+        function displayEstimatedTime() {
+            fetch('/orders/estimated-time')
+                .then(response => response.json())
+                .then(data => {
+                    const { estimatedTime, pendingOrdersCount } = data;
+
+                    // Display the estimated time in the admin panel
+                    const estimatedTimeDiv = document.getElementById('estimated-time');
+                    estimatedTimeDiv.innerHTML = `
                 <p><strong>Pending Orders:</strong> ${pendingOrdersCount}</p>
                 <p><strong>Estimated Delivery Time:</strong> ${estimatedTime} minutes</p>
             `;
-        })
-        .catch(error => console.error('Error fetching estimated time:', error));
-}
+                })
+                .catch(error => console.error('Error fetching estimated time:', error));
+        }
 
-// Call this function on page load
-displayEstimatedTime();
+        // Call this function on page load
+        displayEstimatedTime();
 
-
-
-
+        // Clear All Orders Function
+        document.getElementById('clear-orders-button').addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete ALL orders? This action cannot be undone!')) {
+                fetch('/orders', { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message); // Show the message from the server
+                        populateOrdersTable(); // Refresh the table
+                    })
+                    .catch(error => {
+                        console.error('Error deleting orders:', error);
+                        alert('Error deleting orders');
+                    });
+            }
+        });
     </script>
 
 </body>
 </html>
-

@@ -376,6 +376,28 @@ footer {
     border-top: 1px solid #ffffff50;
     padding-top: 10px;
 }
+/* admin-panel-styles.css */
+
+.status-pending {
+    color: white;
+    display: flex;
+    margin: 10px;
+    border-radius: 15px;
+    justify-content: center;
+    background-color: orange; /* Or any color you prefer for "Pending" */
+    font-weight: bold; /* Optional: Make it stand out */
+}
+
+.status-done {
+    color: white;
+    display: flex;
+    border-radius: 15px;
+    background-color: green;
+    justify-content: center;
+    margin: 10px; /* Or any color you prefer for "Done" */
+    font-weight: bold; /* Optional: Make it stand out */
+}
+
 
 @media screen and (max-width: 768px) {
     header nav ul {
