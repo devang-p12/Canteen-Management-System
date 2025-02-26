@@ -121,15 +121,14 @@ header nav ul li a:hover::after {
     border-top: 1px solid #ddd; /* Light gray line */
     margin: 10px 0; /* Add spacing around divider */
 }
-
-
-
+/* Main Content */
 main {
     padding: 20px;
-    background: #f4f4f4;
+    background-color: #f4f4f4;
 }
+
 /* General Layout for Order Section */
-.os {
+.cart-summary {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
@@ -137,18 +136,17 @@ main {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     font-family: 'Arial', sans-serif;
-    
 }
 
 /* Section Heading and Description */
-.os h2 {
+.cart-summary h2 {
     text-align: center;
     font-size: 28px;
     color: #333;
     margin-bottom: 10px;
 }
 
-.os p {
+.cart-summary p {
     text-align: center;
     font-size: 16px;
     color: #666;
@@ -156,42 +154,62 @@ main {
 }
 
 /* Order Table */
-#ot {
+#cart-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-#ot th,
-#ot td {
-    text-align: center;
+#cart-table th,
+#cart-table td {
+    text-align: left;
     padding: 12px 8px;
     border: 1px solid #ddd;
 }
 
-#ot th {
+#cart-table th {
     background-color: #333;
     color: #fff;
     font-size: 16px;
 }
 
-#ot td {
+#cart-table td {
     font-size: 15px;
     color: #555;
 }
 
-#ot tbody tr:hover {
+#cart-table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Total Section */
-.tc {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+/* Special Instructions Section */
+.special-instructions {
     margin-top: 20px;
 }
 
+.special-instructions label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#instructions {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical;
+}
+
+#instructions:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Estimated Time Section */
 .estimated-time {
     margin: 15px 0;
     padding: 10px;
@@ -201,68 +219,17 @@ main {
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-    position: relative;
 }
 
-.estimated-time span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: scrollText 10s linear infinite;
-}
-
-@keyframes scrollText {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-
-.notes {
-    width: 60%;
-}
-
-.notes label {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
-}
-
-#sn {
-    width: 100%;
-    height: 80px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    resize: none;
-    background-color: #fff;
-}
-
-#sn:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.total {
-    text-align: right;
-    width: 35%;
-}
-
-.total h3 {
-    font-size: 20px;
-    color: #333;
-    margin: 0;
+/* Total Section */
+#total-amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
 }
 
 /* Checkout Button */
-#cb {
+#checkout-button {
     display: block;
     width: 100%;
     padding: 12px;
@@ -278,80 +245,14 @@ main {
     transition: background-color 0.3s ease;
 }
 
-#cb :hover {
+#checkout-button:hover {
     background-color: #0056b3;
 }
 
-#cb :active {
+#checkout-button:active {
     transform: scale(0.98);
 }
 
-
-.os {
-    background: white;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.os h1 {
-    text-align: center;
-    color: #4CAF50;
-}
-
-.os p {
-    text-align: center;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.order-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.button {
-    background: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    transition: background 0.3s ease;
-    align-self: center;
-}
-
-.button:hover {
-    background: #45a049;
-}
-/* Footer */
 footer {
     background: #333;
     color: #fff;
@@ -422,7 +323,6 @@ color: #ddd;
 border-top: 1px solid #ffffff50;
 padding-top: 10px;
 }
-
 
 /* Responsive Design for Mobile Devices */
 @media (max-width: 768px) {

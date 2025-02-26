@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Now - Canteen Management</title>
+    <title>Order</title>
     <link rel="stylesheet" href="order-styles.css">
 </head>
+
 <body>
     <header>
         <div class="headerdev">
             <div>
-                <h1>Ezzy Canteen</h1>
+                <h1>VIT Canteen</h1>
             </div>
             <div>
                 <nav>
@@ -19,17 +21,15 @@
                         <li><a href="menu.html">Menu</a></li>
                         <li><a href="order.html">Order Now</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <!-- Admin Panel link (hidden by default) -->
                         <li id="admin-panel-link" style="display: none;"><a href="admin-panel.html">Admin Panel</a></li>
-                        <!-- Profile dropdown -->
                         <li id="auth-link">
                             <!-- Default login link -->
                             <a href="login.html">Login</a>
                         </li>
                     </ul>
                 </nav>
-            </div>  
-        </div>  
+            </div>
+        </div>
     </header>
     <script>
         // Check if logged in (sessionStorage example)
@@ -40,15 +40,15 @@
             // Replace login link with profile dropdown
             authLink.innerHTML = `
                 <div class="dropdown">
-                    <span class="profile-icon" onclick="toggleDropdown()">${userName}</span> <!-- Profile Name -->
+                    <span class="profile-icon" onclick="toggleDropdown()">${userName}</span>
                     <div class="dropdown-content" id="dropdown-content">
-                        <p><strong>${userName}</strong></p> <!-- User Name -->
-                        <p>${sessionStorage.getItem('userEmail')}</p> <!-- User Email -->
+                        <p><strong>${userName}</strong></p>
+                        <p>${sessionStorage.getItem('userEmail')}</p>
                         <hr />
-                        <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
+                        <a href="#" onclick="logout()">Logout</a>
                     </div>
                 </div>`;
-            
+
             // Check if user is admin
             if (sessionStorage.getItem('isAdmin') === 'true') {
                 document.getElementById('admin-panel-link').style.display = 'block'; // Show Admin Panel link
@@ -63,11 +63,11 @@
 
         // Logout function
         function logout() {
-            sessionStorage.removeItem('loggedIn'); // Clear login status
-            sessionStorage.removeItem('isAdmin'); // Clear admin status
-            sessionStorage.removeItem('userName'); // Clear username
-            sessionStorage.removeItem('userEmail'); // Clear email
-            window.location.href = 'index.html'; // Redirect to home page
+            sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('isAdmin');
+            sessionStorage.removeItem('userName');
+            sessionStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
         }
 
         // Close dropdown if clicked outside
@@ -83,84 +83,42 @@
             }
         };
     </script>
-
-    <script>
-        // Example user data (replace with actual data from backend if needed)
-        const user = { name: "John Doe", email: "john.doe@example.com" };
-    
-        // Check if logged in (sessionStorage example)
-        if (sessionStorage.getItem('loggedIn') === 'true') {
-            const authLink = document.getElementById('auth-link');
-            
-            // Replace login link with profile dropdown
-            authLink.innerHTML = `
-                <div class="dropdown">
-                    <span class="profile-icon" onclick="toggleDropdown()">${user.name}</span> <!-- Profile Name -->
-                    <div class="dropdown-content" id="dropdown-content">
-                        <p><strong>${user.name}</strong></p> <!-- User Name -->
-                        <p>${user.email}</p> <!-- User Email -->
-                        <hr />
-                        <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
-                    </div>
-                </div>`;
-        }
-    
-        // Toggle dropdown visibility
-        function toggleDropdown() {
-            const dropdownContent = document.getElementById('dropdown-content');
-            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-        }
-    
-        // Logout function
-        function logout() {
-            sessionStorage.removeItem('loggedIn'); // Clear login status
-            window.location.href = 'index.html'; // Redirect to home page
-        }
-    
-        // Close dropdown if clicked outside
-        window.onclick = function(event) {
-            if (!event.target.matches('.profile-icon')) {
-                const dropdowns = document.getElementsByClassName("dropdown-content");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === 'block') {
-                        openDropdown.style.display = 'none';
-                    }
-                }
-            }
-        };
-    </script>
-
     <main>
-        <section class="os">
+        <section class="cart-summary">
             <h2>Order Summary</h2>
             <p>Please review your order details below. You can make changes before proceeding to checkout.</p>
-            <table id="ot">
+            <table id="cart-table">
                 <thead>
                     <tr>
                         <th>Item</th>
-                        <th>Price (₹)</th>
                         <th>Quantity</th>
-                        <th>Subtotal (₹)</th>
+                        <th>Price/Item (₹)</th>
+                        <th>Total (₹)</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="cart-items">
                     <!-- Cart items will be dynamically added here -->
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right; font-weight: bold;">Total:</td>
+                        <td id="total-amount">₹0.00</td>
+                    </tr>
+                </tfoot>
+                
             </table>
-            <div class="tc">
-                <div class="notes">
-                    <label for="sn">Special Instructions:</label>
-                    <textarea id="sn" placeholder="Any additional notes for your order?"></textarea>
-                </div>
-                <div class="total">
-                    <h3>Total Amount: ₹<span id="ta">0</span></h3>
-                </div>
-            </div>
             <div id="order-estimated-time" class="estimated-time" style="margin: 15px 0; font-size: 16px; color: #333;">
                 <!-- Estimated time will be dynamically populated -->
             </div>
-            <button id="cb" class="button">Checkout</button>
+            
+            <div class="special-instructions">
+                <label for="instructions">Special Instructions:</label>
+                <textarea id="instructions" placeholder="Any additional notes for your order?"></textarea>
+            </div>
+            <div id="estimated-time" class="estimated-time" style="margin: 15px 0; font-size: 16px; color: #333;">
+                <!-- Estimated time will be dynamically populated -->
+            </div>
+            <button id="checkout-button" class="button">Checkout</button>
         </section>
     </main>
     
@@ -193,92 +151,102 @@
         </div>
         <p class="footer-bottom">&copy; 2024 Ezzy Canteen. All rights reserved.</p>
     </footer>
-
     <script>
-        // Retrieve cart data from localStorage
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
-const orderTableBody = document.querySelector('#ot tbody');
-const totalAmountSpan = document.getElementById('ta');
+        // Function to calculate total amount
+        function calculateTotal() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+            });
+            return total;
+        }
 
-// Populate the table with cart data
-let totalAmount = 0;
+         // Function to display cart items
+ function displayCart() {
+     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+     let cartItemsList = document.getElementById('cart-items');
+     let totalAmountElement = document.getElementById('total-amount');
+     let cartItemsHTML = '';
+     let total = 0;
 
-// Check if cart is empty
-if (cart.length === 0) {
-    orderTableBody.innerHTML = "<tr><td colspan='4'>No items in the cart</td></tr>";
-} else {
-    cart.forEach(item => {
-        const row = document.createElement('tr');
-        const subtotal = item.price * item.quantity;
+     if (cart.length === 0) {
+         cartItemsHTML = '<tr><td colspan="4">No items in the cart</td></tr>';
+     } else {
+         cart.forEach(item => {
+             let itemTotal = item.price * item.quantity;
+             total += itemTotal;
+             cartItemsHTML += `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>₹${item.price.toFixed(2)}</td>
+                    <td>₹${itemTotal.toFixed(2)}</td>
+                </tr>
+            `;
+         });
+     }
 
-        row.innerHTML = `
-            <td>${item.name}</td>
-            <td>₹${item.price}</td>
-            <td>${item.quantity}</td>
-            <td>₹${subtotal}</td>
-        `;
-
-        orderTableBody.appendChild(row);
-        totalAmount += subtotal;
-    });
-}
-
-// Update the total amount display
-totalAmountSpan.textContent = totalAmount;
+     cartItemsList.innerHTML = cartItemsHTML;
+     totalAmountElement.textContent = `₹${total.toFixed(2)}`;
+ }
 
 
-document.getElementById('cb').addEventListener('click', () => {
-    const orderDetails = {
-        customerName: sessionStorage.getItem('userName') || "Guest", // Use session storage for user name
-        items: cart,
-        total: totalAmount,
-        status: 'Pending',
-    };
+        // Function to fetch estimated delivery time
+        function fetchEstimatedTime() {
+            fetch('/orders/estimated-time')
+                .then(response => response.json())
+                .then(data => {
+                    let estimatedDeliveryTime = document.getElementById('order-estimated-time');
+                    estimatedDeliveryTime.textContent = `Estimated Delivery Time: ${data.estimatedTime} minutes`;
+                })
+                .catch(error => {
+                    console.error('Error fetching estimated time:', error);
+                    document.getElementById('estimated-delivery-time').textContent = 'Error fetching estimated time';
+                });
+        }
 
-    // Send order details to the backend
-    fetch('/orders', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderDetails),
-    })
-        .then(response => {
-            if (response.ok) {
+        // Event listener for checkout button
+        document.getElementById('checkout-button').addEventListener('click', function() {
+            let customerName = sessionStorage.getItem('userName') || 'Guest'; // Get customer name from session or default to "Guest"
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let instructions = document.getElementById('instructions').value;
+            let total = calculateTotal(); // Calculate the total amount
+
+            // Prepare order data
+            let orderData = {
+                customerName: customerName,
+                items: cart,
+                total: total, // Include the total amount in the order data
+                instructions: instructions,
+                status: 'Pending'
+            };
+
+            // Send order data to the server
+            fetch('/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Clear cart after successful order
+                localStorage.removeItem('cart');
                 alert('Order placed successfully!');
-                localStorage.removeItem('cart'); // Clear cart after placing order
-                window.location.href = 'index.html'; // Redirect to home page
-            } else {
-                alert('Failed to place order. Please try again.');
-            }
-        })
-        .catch(error => {
-            console.error('Error placing order:', error);
-            alert('An error occurred while placing your order.');
+                window.location.href = 'index.html'; // Redirect to home page or order confirmation page
+            })
+            .catch(error => {
+                console.error('Error placing order:', error);
+                alert('Error placing order');
+            });
         });
-});
 
-// Function to fetch and display estimated time in order page
-function displayEstimatedTimeOnOrderPage() {
-    fetch('/orders/estimated-time')
-        .then(response => response.json())
-        .then(data => {
-            const { estimatedTime } = data;
-
-            // Display the estimated time
-            const estimatedTimeDiv = document.getElementById('order-estimated-time');
-            estimatedTimeDiv.textContent = `Estimated Delivery Time: ${estimatedTime} minutes`;
-        })
-        .catch(error => console.error('Error fetching estimated time:', error));
-}
-
-// Call this function on page load
-displayEstimatedTimeOnOrderPage();
-
-
-
-
-
+        // Display cart items and estimated time on page load
+        displayCart();
+        fetchEstimatedTime();
     </script>
 </body>
+
 </html>

@@ -1,16 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose'); // Import Mongoose
-const bcrypt = require('bcrypt'); // For password hashing
-const path = require('path'); // Ensure you import path for serving files
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
 
-// Replace with your actual connection string
 const uri = 'mongodb+srv://devang-p12:Devang%401203@canteencluster.tetyg.mongodb.net/?retryWrites=true&w=majority&appName=CanteenCluster';
 
-// Connect to MongoDB using Mongoose
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connected to MongoDB");
@@ -19,63 +17,43 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
         console.error("Could not connect to MongoDB", err);
     });
 
-// Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
-// Define User schema and model
 const userSchema = new mongoose.Schema({
     name: String,
     email: { type: String, unique: true },
     password: String,
-    role: { type: String, default: 'user' } // Default role is 'user'
+    role: { type: String, default: 'user' }
 });
 
 const User = mongoose.model('User', userSchema);
 
-// Define Order schema and model
-
-
-// Define Order schema and model
 const orderSchema = new mongoose.Schema({
-    orderId: { type: Number, unique: true, index: true }, // Sequential order ID
-    customerName: String,
-    items: Array,
-    total: Number,
+    orderId: { type: String, unique: true },
+    customerName: { type: String, required: true },
+    items: { type: Array, required: true },
+    total: { type: Number, required: true },
     status: { type: String, default: 'Pending' }
-}, { timestamps: true }); // Add timestamps for automatic createdAt and updatedAt
-
-// Pre-save middleware to generate sequential order ID
-orderSchema.pre('save', async function (next) {
-    if (!this.isNew) {
-        return next();
-    }
-
-    try {
-        // Find the highest existing order ID
-        const lastOrder = await this.constructor.findOne({}, { orderId: 1 }, { sort: { orderId: -1 } }).exec();
-
-        // Determine the next order ID
-        this.orderId = lastOrder ? lastOrder.orderId + 1 : 1;
-
-        next();
-    } catch (error) {
-        console.error('Error generating order ID:', error);
-        next(error);
-    }
 });
 
 const Order = mongoose.model('Order', orderSchema);
 
+// Define Counter schema and model
+const counterSchema = new mongoose.Schema({
+    _id: { type: String, required: true },
+    seq: { type: Number, default: 0 }
+});
 
+const Counter = mongoose.model('Counter', counterSchema);
 
-// Serve the homepage (index.html)
+module.exports = Order;
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// User Signup endpoint
 app.post('/signup', async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -97,7 +75,6 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-// Admin Signup endpoint
 app.post('/admin-signup', async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -119,7 +96,6 @@ app.post('/admin-signup', async (req, res) => {
     }
 });
 
-// Login endpoint
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -143,7 +119,7 @@ app.post('/login', async (req, res) => {
                         <script>
                             sessionStorage.setItem('loggedIn', 'true');
                             sessionStorage.setItem('isAdmin', 'true');
-                            window.location.href = '/index.html'; // Redirect to index.html
+                            window.location.href = '/index.html';
                         </script>
                     `);
                 }
@@ -159,15 +135,44 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Function to initialize the counter
+async function initCounter() {
+    try {
+        const counterDoc = await Counter.findOne({ _id: 'orderId' });
+        if (!counterDoc) {
+            const newCounterDoc = new Counter({ _id: 'orderId', seq: 0 });
+            await newCounterDoc.save();
+            console.log('New counter document created');
+        }
+    } catch (error) {
+        console.error('Error initializing counter:', error);
+    }
+}
+
+// Initialize the counter when the server starts
+initCounter();
+
 // Endpoint to handle new orders
 app.post('/orders', async (req, res) => {
     const orderData = req.body;
 
-    const order = new Order(orderData);
-
     try {
+        // Find and update the counter
+        const counter = await Counter.findByIdAndUpdate(
+            { _id: 'orderId' },
+            { $inc: { seq: 1 } },
+            { new: true, upsert: true } // Create if it doesn't exist
+        );
+
+        // Create a new order with the generated order ID
+        const order = new Order({
+            ...orderData,
+            orderId: counter.seq.toString()  // Use the updated counter value
+        });
+
         await order.save();
         console.log('New order received:', order);
+
         res.status(201).send(order);
     } catch (error) {
         console.error('Error saving order:', error);
@@ -178,15 +183,14 @@ app.post('/orders', async (req, res) => {
 // Endpoint to get all orders for admin panel
 app.get('/orders', async (req, res) => {
     try {
-        const orders = await Order.find();
-        res.json(orders); // Respond with JSON data of orders
+        const orders = await Order.find().sort({ orderId: 1 }); // Sort by orderId (ascending)
+        res.json(orders);
     } catch (error) {
         console.error('Error fetching orders:', error);
-        res.status(500).send('Error fetching orders');
+        res.status(500).json({ error: 'Failed to fetch orders' });
     }
 });
 
-// Endpoint to update an order status
 app.patch('/orders/:id', async (req, res) => {
     const { id } = req.params;
 
@@ -201,23 +205,17 @@ app.patch('/orders/:id', async (req, res) => {
             return res.status(404).send('Order not found');
         }
 
-        res.json(updatedOrder); // Respond with updated order details
+        res.json(updatedOrder);
     } catch (error) {
         console.error('Error updating order:', error);
         res.status(500).send('Error updating order');
     }
 });
 
-// Add this route to your Express server
 app.get('/orders/estimated-time', async (req, res) => {
     try {
-        // Count the number of pending orders
         const pendingOrdersCount = await Order.countDocuments({ status: 'Pending' });
-
-        // Define the average preparation time (e.g., 10 minutes per order)
         const avgPreparationTime = 10; // minutes
-
-        // Calculate the estimated time
         const estimatedTime = pendingOrdersCount * avgPreparationTime;
 
         res.status(200).json({ estimatedTime, pendingOrdersCount });
@@ -227,13 +225,13 @@ app.get('/orders/estimated-time', async (req, res) => {
     }
 });
 
-// Endpoint to delete all orders (use with caution!)
 app.delete('/orders', async (req, res) => {
+    console.log("Received DELETE request for clearing orders"); // Debug log
     try {
-        const result = await Order.deleteMany({}); // Delete all documents in the Order collection
-
-        console.log(`Deleted ${result.deletedCount} orders`);
-        res.status(200).send({ message: `Deleted ${result.deletedCount} orders` });
+        const result = await Order.deleteMany({});
+        await Counter.findOneAndUpdate({ _id: 'orderId' }, { $set: { seq: 0 } }, { upsert: true });
+        console.log(`Deleted ${result.deletedCount} orders and reset the counter`);
+        res.status(200).send({ message: `Deleted ${result.deletedCount} orders and reset the counter` });
     } catch (error) {
         console.error('Error deleting orders:', error);
         res.status(500).send({ message: 'Error deleting orders' });
@@ -241,8 +239,6 @@ app.delete('/orders', async (req, res) => {
 });
 
 
-
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

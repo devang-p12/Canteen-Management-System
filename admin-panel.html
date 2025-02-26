@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - VIT Canteen</title>
-    <link rel="stylesheet" href="admin-panel-styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="admin-panel-styles.css">
+    <style>
+        #admin-panel-link {
+            display: none;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+        .pending {
+            background-color: orange;
+        }
+        .done {
+            background-color: green;
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <div class="headerdev">
             <div>
-                <h1>VIT Canteen</h1>
+                <h1>Ezzy Canteen</h1>
             </div>
             <div>
                 <nav>
@@ -19,8 +39,8 @@
                         <li><a href="menu.html">Menu</a></li>
                         <li><a href="order.html">Order Now</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <!-- Admin Panel link (visible by default) -->
-                        <li id="admin-panel-link"><a href="#">Admin Panel</a></li>
+                        <!-- Admin Panel link (hidden by default) -->
+                        <li id="admin-panel-link" style="display: none;"><a href="admin-panel.html">Admin Panel</a></li>
                         <!-- Profile dropdown -->
                         <li id="auth-link">
                             <!-- Default login link -->
@@ -28,8 +48,8 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
-        </div>
+            </div>  
+        </div>  
     </header>
     <script>
         // Check if logged in (sessionStorage example)
@@ -48,7 +68,7 @@
                         <a href="#" onclick="logout()">Logout</a> <!-- Logout Option -->
                     </div>
                 </div>`;
-
+            
             // Check if user is admin
             if (sessionStorage.getItem('isAdmin') === 'true') {
                 document.getElementById('admin-panel-link').style.display = 'block'; // Show Admin Panel link
@@ -83,14 +103,15 @@
             }
         };
     </script>
+
     <script>
         // Example user data (replace with actual data from backend if needed)
         const user = { name: "John Doe", email: "john.doe@example.com" };
-
+    
         // Check if logged in (sessionStorage example)
         if (sessionStorage.getItem('loggedIn') === 'true') {
             const authLink = document.getElementById('auth-link');
-
+            
             // Replace login link with profile dropdown
             authLink.innerHTML = `
                 <div class="dropdown">
@@ -103,19 +124,19 @@
                     </div>
                 </div>`;
         }
-
+    
         // Toggle dropdown visibility
         function toggleDropdown() {
             const dropdownContent = document.getElementById('dropdown-content');
             dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
         }
-
+    
         // Logout function
         function logout() {
             sessionStorage.removeItem('loggedIn'); // Clear login status
             window.location.href = 'index.html'; // Redirect to home page
         }
-
+    
         // Close dropdown if clicked outside
         window.onclick = function(event) {
             if (!event.target.matches('.profile-icon')) {
@@ -129,43 +150,35 @@
             }
         };
     </script>
+
     <main>
-        <!-- Clear Orders Button -->
-        <button id="clear-orders-button" style="margin-bottom: 20px; padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;">Clear All Orders</button>
+        <button id="clear-orders-button" style="margin-bottom: 20px; padding: 10px 15px; background-color: #f44336;
+            color: white; border: none; border-radius: 5px; cursor: pointer;">Clear All Orders</button>
 
-        <div id="estimated-time" style="margin-bottom: 20px; font-size: 16px; color: #333;">
-            <!-- This will be dynamically populated -->
-        </div>
+        <div id="estimated-time" style="margin-bottom: 20px; font-size: 16px; color: #333;"></div>
 
-        <!-- Orders Table -->
         <table class="orders-table">
             <thead>
                 <tr>
                     <th>Order ID</th>
                     <th>Customer Name</th>
                     <th>Order Details</th>
+                    <th>Total</th>
                     <th>Status</th>
-                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="orders-body">
-                <!-- Orders will be dynamically populated here -->
-            </tbody>
+            <tbody id="orders-body"></tbody>
         </table>
-
     </main>
 
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer>
-        <div class="fc">
-            <!-- About Us Section -->
-            <div class="fsa">
+        <div class="footer-content">
+            <div class="footer-section about">
                 <h3>About Us</h3>
                 <p>We aim to provide delicious and hygienic food to all students and staff at VIT. Our focus is on quality, affordability, and quick service.</p>
             </div>
-
-            <!-- Quick Links Section -->
-            <div class="sl">
+            <div class="footer-section links">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="menu.html">Our Menu</a></li>
@@ -173,70 +186,72 @@
                     <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
-
-            <!-- Contact Us Section -->
-            <div class="fsc">
+            <div class="footer-section contact">
                 <h3>Contact Us</h3>
-                <p>Email: director@vit.edu </p>
-                <p>Phone: +91 020-24202290</p>
-
-                <!-- Social Media Links -->
-                <div class="sl">
+                <p>Email: support@vitcanteen.com</p>
+                <p>Phone: +91 9999999999</p>
+                <div class="social-links">
                     <a href="#"><img src="assets/facebook.svg" alt="Facebook"></a>
                     <a href="#"><img src="assets/instagram.svg" alt="Instagram"></a>
                     <a href="#"><img src="assets/twitter.svg" alt="Twitter"></a>
                 </div>
             </div>
         </div>
-
-        <!-- Footer Copyright -->
-        <p class="fb">&copy; 2025 VIT Canteen. All rights reserved.</p>
+        <p class="footer-bottom">&copy; 2024 Ezzy Canteen. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for order actions -->
     <script>
-        // Function to populate orders table from localStorage
+
         function populateOrdersTable() {
             const ordersBody = document.querySelector('#orders-body');
 
-            fetch('/orders') // Fetch orders from the server
+            fetch('/orders')
                 .then(response => response.json())
                 .then(orders => {
-                    // Clear existing rows
                     ordersBody.innerHTML = '';
 
-                    // Populate table with orders
                     orders.forEach(order => {
                         const itemsDetails = order.items.map(item => `${item.quantity}x ${item.name}`).join(', ');
+                        const statusClass = order.status === 'Done' ? 'done' : 'pending';
 
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td>${order.orderId}</td> <!-- Use MongoDB's _id -->
+                            <td>${order.orderId}</td>
                             <td>${order.customerName}</td>
                             <td>${itemsDetails}</td>
-                            <td>${order.status}</td>
-                            <td><button onclick="markAsDone('${order._id}')">Mark as Done</button></td> <!-- Use _id for marking as done -->
+                            <td>₹${order.total.toFixed(2)}</td>
+                            <td class="status ${statusClass}" onclick="toggleStatus('${order._id}', this)">${order.status}</td>
                         `;
 
                         ordersBody.appendChild(row);
                     });
                 })
-                .catch(error => console.error('Error fetching orders:', error));
+                .catch(error => {
+                    console.error('Error fetching orders:', error);
+                    alert('Error fetching orders. See console for details.');
+                });
         }
 
-        // Call function to populate table on load
+        function toggleStatus(orderId, element) {
+            const newStatus = element.textContent === 'Pending' ? 'Done' : 'Pending';
+            fetch(`/orders/${orderId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            })
+            .then(response => response.json())
+            .then(() => {
+                element.textContent = newStatus;
+                element.className = `status ${newStatus === 'Done' ? 'done' : 'pending'}`;
+            })
+            .catch(error => {
+                console.error('Error updating order status:', error);
+                alert('Error updating order status. See console for details.');
+            });
+        }
+
         populateOrdersTable();
 
-        function markAsDone(orderId) {
-            fetch(`/orders/${orderId}`, { method: 'PATCH' }) // Send a PATCH request to update the status
-                .then(response => response.json())
-                .then(updatedOrder => {
-                    populateOrdersTable(); // Refresh the table after updating status
-                })
-                .catch(error => console.error('Error updating order status:', error));
-        }
-
-        // Function to fetch and display estimated time in admin panel
         function displayEstimatedTime() {
             fetch('/orders/estimated-time')
                 .then(response => response.json())
@@ -256,22 +271,21 @@
         // Call this function on page load
         displayEstimatedTime();
 
-        // Clear All Orders Function
-        document.getElementById('clear-orders-button').addEventListener('click', function() {
-            if (confirm('Are you sure you want to delete ALL orders? This action cannot be undone!')) {
-                fetch('/orders', { method: 'DELETE' })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.message); // Show the message from the server
-                        populateOrdersTable(); // Refresh the table
-                    })
-                    .catch(error => {
-                        console.error('Error deleting orders:', error);
-                        alert('Error deleting orders');
-                    });
-            }
-        });
-    </script>
+    document.getElementById("clear-orders-button").addEventListener("click", async () => {
+    const confirmDelete = confirm("Are you sure you want to clear all orders?");
+    if (!confirmDelete) return;
 
+    try {
+        const response = await fetch("/orders", { method: "DELETE" });
+        const result = await response.json();
+        alert(result.message);
+        location.reload(); // Refresh orders list
+    } catch (error) {
+        console.error("Error clearing orders:", error);
+        alert("Failed to clear orders.");
+    }
+});
+
+    </script>
 </body>
 </html>
